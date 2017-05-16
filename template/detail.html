@@ -1,0 +1,86 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link href="../css/app.css" rel="stylesheet" />
+		<link href="../css/oneday/detail.css" rel="stylesheet" />
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">用户</h1>
+		</header>
+		<div class="mui-content" >
+			<!--<ul class="mui-table-view mui-table-view-chevron">
+				<li class="mui-table-view-cell mui-media">
+					<img class="mui-media-object mui-pull-left head-img" src="../img/ui.png" />
+					<div class="mui-media-body">
+						<h4>{{name}}</h4>
+						<p style="overflow: hidden;">{{age}}{{height}}{{education}}{{marriage}}</p>
+						<p>{{signature}}</p>
+					</div>
+				</li>
+			</ul>
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell mui-media user-content">
+					<p>的假的撒娇的刷卡惊呆了撒娇带宽数据库，大胜靠德扩山</p>
+					<img class="" src="../img/yuantiao.jpg"/>
+					<p>的假的撒娇的刷卡惊呆了撒娇带宽数据库，大胜靠德扩山</p>
+					<img class="" src="../img/yuantiao.jpg"/>
+				</li>
+			</ul>	
+			<div class="mui-content-padded">
+				<button class="mui-btn mui-btn-success mui-btn-block">聊天</button>
+			</div>-->
+			
+		</div>
+		<script id='content-template' type="text/template">
+			<ul class="mui-table-view mui-table-view-chevron">
+				<li class="mui-table-view-cell mui-media">
+					<img class="mui-media-object mui-pull-left head-img" src="<%=(targetUser.head)%>" />
+					<div class="mui-media-body">
+						<h4><%=(targetUser.name)%> </h4>
+						<p style="overflow: hidden;">
+							<%=(targetUser.age)%>岁
+							<% if(targetUser.height) { %>|<%=(targetUser.height)%>cm<% } %>	
+							<% if(targetUser.education) { %>|<%=(targetUser.education)%><% } %>	
+							<% if(targetUser.marriage) { %>|<%=(targetUser.marriage)%><% } %>	
+						</p>
+						<p><%=(targetUser.signature)%></p>
+					</div>
+				</li>
+			</ul>
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell mui-media user-content">
+					<%=(targetUser.detail)%>
+				</li>
+			</ul>	
+			
+			<div class="mui-content-padded">
+				<% if(relation) { %> 
+					<% if (relation.status>=1 && relation.status<=4) {%>
+						<button class="mui-btn mui-btn-success mui-btn-block btn-chat" msg-id="<%=(targetUser.id)%>">聊天</button>
+					<% } else if (relation.status<1) {%>	
+						<% if (targetUser.sex==1) {%>
+							<button class="mui-btn mui-btn-success mui-btn-block btn-send" msg-id="<%=(targetUser.id)%>">发送</button>
+						<% }%>	
+					<% }  %>
+				<% }  else {%>	
+					<% if (targetUser.sex==1) {%>
+							<button class="mui-btn mui-btn-success mui-btn-block btn-send" msg-id="<%=(targetUser.id)%>">发送</button>
+					<% }%>	
+				<% }  %>	
+			</div>
+		</script>
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/oneday/base.js"></script>
+		<script src="../js/oneday/detail.js"></script>
+		<script src="../js/arttmpl.js"></script>
+	</body>
+
+</html>

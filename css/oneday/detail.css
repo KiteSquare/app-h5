@@ -1,0 +1,17 @@
+.mui-table-view{
+	margin-top: 15px;
+}
+.user-content{
+	
+}
+.user-content img{
+	max-width: 100%;
+}
+.mui-content-padded {
+	padding-bottom: 30px;
+}
+.mui-btn-block{
+	width: 65%;
+	margin: 0 auto;
+	padding: 10px 0;
+}

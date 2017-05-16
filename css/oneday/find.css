@@ -1,0 +1,12 @@
+.recomend-list .mui-table-view-cell:after{
+	right: 15px;
+}
+.recomend-list .mui-table-view-cell{
+	padding-right: 51px;
+}
+.recomend-list .app-icon-female{
+	margin-left: 5px;
+}
+.recomend-list .app-icon-male{
+	margin-left: 5px;
+}

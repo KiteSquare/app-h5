@@ -1,0 +1,22 @@
+/*
+ *这是单独为hello mui准备的个性化css，可以覆盖标准mui的css定义；
+ * 在实际项目开发时，建议为App单独写一个css文件，从而实现项目的自定义皮肤功能；
+ * 
+ * */
+a{
+	color: #000000;
+}
+.mui-bar-tab .mui-tab-item.mui-active {
+				color: #000000;
+}
+
+.app-icon-female{
+	background: url(../img/female.png) no-repeat center;
+	width: 16px;
+    height: 16px;
+}
+.app-icon-male{
+	background: url(../img/man.png) no-repeat center;
+	width: 16px;
+    height: 16px;
+}

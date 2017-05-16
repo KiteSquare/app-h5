@@ -1,0 +1,318 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link href="../css/app.css" rel="stylesheet" />
+		<link href="../css/mui.imageviewer.css" rel="stylesheet" />
+		<link href="../css/oneday/friends.css" rel="stylesheet" />
+		<style type="text/css">
+
+		</style>
+	</head>
+
+	<body class="mui-fullscreen">
+		<div id="app" class="mui-views">
+			<div class="mui-view">
+				<div class="mui-navbar">
+				</div>
+				<div class="mui-pages">
+				</div>
+			</div>
+		</div>
+
+		<div id="menu" class="mui-page">
+			<!--页面标题栏开始-->
+			<div class="mui-navbar-inner mui-bar mui-bar-nav">
+				<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
+					<span class="mui-icon mui-icon-left-nav"></span>返回
+				</button>
+				<h1 class="mui-center mui-title">靠谱</h1>
+			</div>
+			<!--页面标题栏结束-->
+			<!--页面主内容区开始-->
+			<div class="mui-page-content">
+				<div class="mui-scroll-wrapper">
+					<div class="mui-scroll">
+						<ul class="mui-table-view" id="friends">
+							<li class="mui-table-view-cell mui-media act-cell">
+								<a href="#page1">
+									<div class="act-img">
+										<img class="" src="../img/ui.png">
+										<span class="mui-badge">9</span>
+									</div>
+
+									<div class="act-body clearfix">
+										幸福
+										<p class='mui-ellipsis'>能和心爱的人一起睡觉，是件幸福的事情；可是，打呼噜怎么办？</p>
+									</div>
+									<div class="mui-media-footer">
+										<span>15:33</span>
+										<span>聊天中</span>
+									</div>
+								</a>
+							</li>
+							<li class="mui-table-view-cell mui-media">
+								<a href="#page2">
+									<img class="mui-media-object mui-pull-left" src="../img/ui.png">
+									<div class="mui-media-body">
+										木屋
+										<p class='mui-ellipsis'>想要这样一间小木屋，夏天挫冰吃瓜，冬天围炉取暖.</p>
+									</div>
+									<div class="mui-media-footer">
+										<span>15:33</span>
+
+										<div class="mui-pull-right">
+											<button class="mui-btn mui-btn-link app-btn-accept">接受TA</button>
+											<a class="mui-action-menu mui-icon mui-icon-plus" href="#opPopover"></a>
+
+										</div>
+									</div>
+								</a>
+
+							</li>
+							<li class="mui-table-view-cell mui-media">
+								<a href="javascript:;">
+									<img class="mui-media-object mui-pull-left" src="../img/ui.png">
+									<div class="mui-media-body">
+										CBD
+										<p class='mui-ellipsis'>烤炉模式的城，到黄昏，如同打翻的调色盘一般.</p>
+									</div>
+									<div class="mui-media-footer">
+										<span>15:33</span>
+										<span>已结束</span>
+									</div>
+								</a>
+							</li>
+
+						</ul>
+					</div>
+				</div>
+			</div>
+			<!--页面主内容区结束-->
+		</div>
+		<div id="opPopover" class="mui-popover mui-bar-popover">
+			<div class="mui-popover-arrow"></div>
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell">
+					<a href="javascript:void(0);" msg-type="accept" msg-id="1">接受</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a href="javascript:void(0);" msg-type="reject">拒绝</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a href="javascript:void(0);" msg-type="tipoff">举报</a>
+				</li>
+
+			</ul>
+
+		</div>
+
+		<script id='opPopover-template' type="text/template">
+			<% for(var i in record){ var item=record[i]; %>
+			<div id="opPopover-<%=(item.id)%>" class="mui-popover mui-bar-popover">
+				<div class="mui-popover-arrow"></div>
+				<ul class="mui-table-view">
+
+					<% if(item.sex==0 ) { %>
+						<% if(item.candStatus==4 ) { %>
+							<li class="mui-table-view-cell">
+								<a href="javascript:void(0);" msg-type="accept" msg-id="<%=(item.id)%>">接受</a>
+							</li>
+							<li class="mui-table-view-cell">
+								<a href="javascript:void(0);" msg-type="reject" msg-id="<%=(item.id)%>">拒绝</a>
+							</li>
+							<li class="mui-table-view-cell">
+								<a href="javascript:void(0);" msg-type="tipoff" msg-id="<%=(item.id)%>">举报</a>
+							</li>
+						<% } else if(item.candStatus==8 ) { %>
+							<li class="mui-table-view-cell">
+								<a href="javascript:void(0);" msg-type="tipoff" msg-id="<%=(item.id)%>">举报</a>
+							</li>
+						<% } %>
+					<% } else {%>
+						<li class="mui-table-view-cell">
+							<a href="javascript:void(0);" msg-type="tipoff" msg-id="<%=(item.id)%>">举报</a>
+						</li>
+					<%}%>
+				</ul>
+
+			</div>
+
+			<% } %>
+		</script>
+
+		<script id='friends-template' type="text/template">
+			<% for(var i in record){ var item=record[i]; %>
+			<%if (item.candStatus == 1 || item.candStatus == 2) {%>
+				<li class="mui-table-view-cell mui-media act-cell" id="user-<%=( item.id) %>">
+					<a href="#page-<%=( item.id) %>">
+						<div class="act-img">
+							<img src="<%=( item.head) %>">
+							<span class="mui-badge" style="display: none;"></span>
+						</div>
+
+						<div class="act-body clearfix">
+							<%=( item.name|| '&nbsp;&nbsp;') %>
+							<p class='mui-ellipsis'>
+								
+							</p>
+						</div>
+					</a>
+						<div class="mui-media-footer">
+							<span class="last-msg-time"></span>
+							<span>已接受</span>
+						</div>
+					
+				</li>
+			<% } else { %>
+				<li class="mui-table-view-cell mui-media" id="user-<%=( item.id) %>">
+					<a href="#page-<%=( item.id) %>">
+						<div class="mui-media-object mui-pull-left">
+							<img class="mui-media-object" src="<%=( item.head) %>">
+							<span class="mui-badge" style="display: none;"></span>
+						</div>
+	
+						<div class="mui-media-body clearfix">
+							<%=( item.name|| '&nbsp;&nbsp;') %>
+							<p class='mui-ellipsis'>
+							</p>
+						</div>
+					</a>
+						<div class="mui-media-footer">
+							<span class="last-msg-time"></span>
+	
+							<% if(item.sex==1 ) { %>
+							<% if(item.candStatus==8 ) { %>
+							<span>已结束</span>
+							<% } else { %>
+							<span>聊天中</span>
+							<% } %>
+							<% } else { %>
+							<% if(item.candStatus==4 ) { %>
+							<div class="mui-pull-right">
+								<button class="mui-btn mui-btn-link app-btn-accept" msg-id="<%=(item.id)%>">接受TA</button>
+								<a class="mui-action-menu mui-icon mui-icon-plus" href="#opPopover-<%=(item.id)%>"></a>
+							</div>
+							<% } else if(item.candStatus==8 ) { %>
+							<span>已结束</span>
+							<% } %>
+							<% } %>
+	
+						</div>
+					
+				</li>
+			<% } %>
+			
+			<% } %>
+		</script>
+
+		<script id='chat-box-template' type="text/template">
+			<!--页面标题栏开始-->
+			<div class="mui-navbar-inner mui-bar mui-bar-nav">
+				<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
+					<span class="mui-icon mui-icon-left-nav"></span>返回
+				</button>
+				<h1 class="mui-center mui-title"><%=( user.name|| '&nbsp;&nbsp;') %></h1>
+			</div>
+			<pre class='h'></pre>
+			<!--页面标题栏结束-->
+			<!--页面主内容区开始-->
+			<div class="mui-page-content">
+				<div class="mui-scroll-wrapper">
+					<div class="mui-scroll">
+
+						<div class='msg-list'>
+						</div>
+					</div>
+				</div>
+				<footer>
+					<div class="footer-left">
+						<i class="mui-icon mui-icon-camera msg-image" style="font-size: 28px;"></i>
+					</div>
+					<div class="footer-center">
+						<textarea type="text" class='input-text msg-text'></textarea>
+						<button type="button" class='input-sound msg-sound' style="display: none;">按住说话</button>
+					</div>
+					<label for="" class="footer-right">
+						<i class="mui-icon mui-icon-mic msg-type"></i>
+					</label>
+				</footer>
+				<div class="rprogress sound-alert">
+					<div class="rschedule"></div>
+					<div class="r-sigh">!</div>
+					<div class="rsalert audio_tips">手指上滑，取消发送</div>
+				</div>
+			</div>
+		</script>
+		<!--<script id='msg-template' type="text/template">
+			<% for(var i in record){ var item=record[i]; %>
+			<div class="msg-item <%= (item.sender=='self'?' msg-item-self':'') %>" msg-type='<%=(item.type)%>' msg-content='<%=(item.content)%>'>
+				<% if(item.sender=='self' ) { %>
+				<i class="msg-user mui-icon mui-icon-person"></i>
+				<% } else { %>
+				<img class="msg-user-img" src="../images/logo.png" alt="" />
+				<% } %>
+				<div class="msg-content">
+					<div class="msg-content-inner">
+						<% if(item.type=='text' ) { %>
+						<%=( item.content|| '&nbsp;&nbsp;') %>
+						<% } else if(item.type=='image' ) { %>
+						<img class="msg-content-image" src="<%=(item.content)%>" style="max-width: 100px;" />
+						<% } else if(item.type=='sound' ) { %>
+						<span class="mui-icon mui-icon-mic" style="font-size: 18px;font-weight: bold;"></span>
+						<span class="play-state">点击播放</span>
+						<% } %>
+					</div>
+					<div class="msg-content-arrow"></div>
+				</div>
+				<div class="mui-item-clear"></div>
+			</div>
+			<% } %>
+		</script>-->
+		<script id='msg-template' type="text/template">
+			<% for(var i in record){ var item=record[i]; %>
+			<div class="msg-item <%= (item.flow=='out'?' msg-item-self':'') %>" msg-url=<% if(item.file) {%> "
+				<%=(item.file.url) %>"
+				<% }%> msg-id='
+				<%=(item.idClient)%>' msg-type='
+				<%=(item.type)%>' msg-content='
+				<%=(item.text)%>'>
+				<% if(item.flow=='out' ) { %>
+				<!--<i class="msg-user mui-icon mui-icon-person"></i>-->
+				<img class="msg-self-img msg-img" src="<%=( item.head)%>" alt="" msg-uid="<%=(item.from) %>" />
+				<% } else { %>
+				<img class="msg-user-img msg-img" src="<%=( item.head)%>" alt="" msg-uid="<%=(item.target) %>" />
+				<% } %>
+				<div class="msg-content">
+					<div class="msg-content-inner">
+						<% if(item.type=='text' ) { %>
+						<%=( item.text|| '&nbsp;&nbsp;') %>
+						<% } else if(item.type=='image' ) { %>
+						<img class="msg-content-image" src="<%=(item.file.url)%>" style="max-width: 100px;" />
+						<% } else if(item.type=='audio' ) { %>
+						<span class="mui-icon mui-icon-mic" style="font-size: 18px;font-weight: bold;"></span>
+						<span class="play-state" msg-dur=<%=( item.file.dur) %> >点击播放 <%= (item.file.duration) %>秒</span>
+						<% } %>
+					</div>
+					<div class="msg-content-arrow"></div>
+				</div>
+				<div class="mui-item-clear"></div>
+			</div>
+			<% } %>
+		</script>
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/mui.view.js "></script>
+		<script src="../js/mui.imageViewer.js"></script>
+		<script src="../js/trd/NIM_Web_SDK_v3.4.0.js"></script>
+		<script src="../js/trd/NIM_Web_NIM_v3.4.0.js"></script>
+		<script src="../js/arttmpl.js"></script>
+		<script src="../js/oneday/cache.js"></script>
+		<script src="../js/oneday/base.js"></script>
+		<script src="../js/oneday/friend.js"></script>
+	</body>
+
+</html>

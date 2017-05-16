@@ -1,0 +1,132 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link href="../css/app.css" rel="stylesheet" />
+		<link href="../css/oneday/find.css" rel="stylesheet" />
+	</head>
+
+	<body>
+		<div class="mui-content">
+			<ul class="mui-table-view mui-table-view-chevron">
+				<li class="mui-table-view-cell mui-media">
+					<a href="friends.html" class="mui-navigate-right">
+						<span class="mui-icon mui-icon-chatboxes-filled" style="color: black;"></span> 聊天
+						<span class="mui-badge mui-badge-danger" style="height: 12px;"></span>
+					</a>
+				</li>
+			</ul>
+
+			<ul class="mui-table-view mui-table-view-chevron" style="margin-top: 15px;">
+				<li class="mui-table-view-cell mui-media">
+					<a href="search.html" class="mui-navigate-right">
+						<span class="mui-icon mui-icon-eye" style="color: black;"></span> 推荐
+					</a>
+				</li>
+				<ul class="mui-table-view recomend-list">
+					<li class="mui-table-view-cell mui-media">
+						<a href="detail.html">
+							<div class="mui-media-object mui-pull-left">
+								<img class="mui-media-object" src="../img/ui.png">
+							</div>
+
+							<div class="mui-media-body clearfix">
+								幸福<span class="mui-icon app-icon-female"></span>
+								<!--<span class="mui-pull-right" style="font-size: 16px;color: gray;">25岁</span>-->
+								<p class='mui-ellipsis'>能和心爱的人一起睡觉，是件幸福的事情；可是，打呼噜怎么办？</p>
+							</div>
+						</a>
+					</li>
+					<li class="mui-table-view-cell mui-media">
+						<a href="detail.html">
+							<div class="mui-media-object mui-pull-left">
+								<img class="mui-media-object" src="../img/ui.png">
+							</div>
+
+							<div class="mui-media-body clearfix">
+								幸福<span class="mui-icon app-icon-female"></span>
+								<p class='mui-ellipsis'>能和心爱的人一起睡觉，是件幸福的事情；可是，打呼噜怎么办？</p>
+							</div>
+						</a>
+					</li>
+					<li class="mui-table-view-cell mui-media">
+						<a href="detail.html">
+							<div class="mui-media-object mui-pull-left">
+								<img class="mui-media-object" src="../img/ui.png">
+							</div>
+
+							<div class="mui-media-body clearfix">
+								幸福<span class="mui-icon app-icon-female"></span>
+								<p class='mui-ellipsis'>能和心爱的人一起睡觉，是件幸福的事情；可是，打呼噜怎么办？</p>
+							</div>
+						</a>
+					</li>
+					<li class="mui-table-view-cell mui-media">
+						<a href="detail.html">
+							<div class="mui-media-object mui-pull-left">
+								<img class="mui-media-object" src="../img/ui.png">
+							</div>
+
+							<div class="mui-media-body clearfix">
+								幸福<span class="mui-icon app-icon-female"></span>
+								<p class='mui-ellipsis'>能和心爱的人一起睡觉，是件幸福的事情；可是，打呼噜怎么办？</p>
+							</div>
+						</a>
+					</li>
+					<li class="mui-table-view-cell mui-media">
+						<a href="detail.html">
+							<div class="mui-media-object mui-pull-left">
+								<img class="mui-media-object" src="../img/ui.png">
+							</div>
+
+							<div class="mui-media-body clearfix">
+								幸福<span class="mui-icon app-icon-female"></span>
+								<p class='mui-ellipsis'>能和心爱的人一起睡觉，是件幸福的事情；可是，打呼噜怎么办？</p>
+							</div>
+						</a>
+					</li>
+				</ul>
+
+				<li class="mui-table-view-cell mui-media " id="app-next">
+					<div class="mui-pull-right">
+						<span>换一换</span>
+					</div>
+				</li>
+			</ul>
+
+		</div>
+		<script type="text/template" id="recomends-template">
+			<% for(var i in users){ var user=users[i]; %>
+			<li class="mui-table-view-cell mui-media">
+				<a href="detail.html?uid=<%=(user.id)%>">
+					<div class="mui-media-object mui-pull-left">
+						<img class="mui-media-object" src="<%=(user.head)%>">
+					</div>
+
+					<div class="mui-media-body clearfix">
+						<%=(user.name)%>
+						<%if (user.sex==0){%>
+						<span class="mui-icon app-icon-male"></span>
+						<%} else {%>
+						<span class="mui-icon app-icon-female"></span>
+						<%}%>
+
+						<p class='mui-ellipsis'>
+							<%=(user.signature)%>
+						</p>
+					</div>
+				</a>
+			</li>
+			<% } %>
+		</script>
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/oneday/base.js"></script>
+		<script src="../js/oneday/find.js"></script>
+		<script src="../js/arttmpl.js"></script>
+	</body>
+
+</html>
