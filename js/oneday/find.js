@@ -8,16 +8,21 @@ od.find = {
 	initPage: function() {
 		mui.init();
 		template.config('escape', false);
-		var view = mui.preload({
-			//					view = mui.openWindow({	
-			url: "friends.html",
-			id: "friends.html", //默认使用当前页面的url作为id
-			styles: {
-				top: '0',
-				bottom: '0'
-			}, //窗口参数
-			extras: {} //自定义扩展参数
-		});
+		var friendswebview = plus.webview.getWebviewById("friends.html");
+		if (friendswebview) {
+			friendswebview.reload();
+		} else {
+			var view = mui.preload({
+				//					view = mui.openWindow({	
+				url: "friends.html",
+				id: "friends.html", //默认使用当前页面的url作为id
+				styles: {
+					top: '0',
+					bottom: '0'
+				}, //窗口参数
+				extras: {} //自定义扩展参数
+			});
+		}
 		
 		od.find.loadRecomend();
 	},

@@ -6,12 +6,9 @@
 		<title></title>
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link href="../css/oneday/friends.css" rel="stylesheet" />
 		<link href="../css/app.css" rel="stylesheet" />
 		<link href="../css/mui.imageviewer.css" rel="stylesheet" />
-		<link href="../css/oneday/friends.css" rel="stylesheet" />
-		<style type="text/css">
-
-		</style>
 	</head>
 
 	<body class="mui-fullscreen">
@@ -35,10 +32,10 @@
 			<!--页面标题栏结束-->
 			<!--页面主内容区开始-->
 			<div class="mui-page-content">
-				<div class="mui-scroll-wrapper">
+				<div class="mui-scroll-wrapper" id="app-friends-wrapper">
 					<div class="mui-scroll">
 						<ul class="mui-table-view" id="friends">
-							<li class="mui-table-view-cell mui-media act-cell">
+							<!--<li class="mui-table-view-cell mui-media act-cell">
 								<a href="#page1">
 									<div class="act-img">
 										<img class="" src="../img/ui.png">
@@ -87,14 +84,110 @@
 									</div>
 								</a>
 							</li>
+							<li class="mui-table-view-cell mui-media">
+								<a href="#page2">
+									<img class="mui-media-object mui-pull-left" src="../img/ui.png">
+									<div class="mui-media-body">
+										木屋
+										<p class='mui-ellipsis'>想要这样一间小木屋，夏天挫冰吃瓜，冬天围炉取暖.</p>
+									</div>
+									<div class="mui-media-footer">
+										<span>15:33</span>
 
+										<div class="mui-pull-right">
+											<button class="mui-btn mui-btn-link app-btn-accept">接受TA</button>
+											<a class="mui-action-menu mui-icon mui-icon-plus" href="#opPopover"></a>
+
+										</div>
+									</div>
+								</a>
+
+							</li>
+							<li class="mui-table-view-cell mui-media">
+								<a href="javascript:;">
+									<img class="mui-media-object mui-pull-left" src="../img/ui.png">
+									<div class="mui-media-body">
+										CBD
+										<p class='mui-ellipsis'>烤炉模式的城，到黄昏，如同打翻的调色盘一般.</p>
+									</div>
+									<div class="mui-media-footer">
+										<span>15:33</span>
+										<span>已结束</span>
+									</div>
+								</a>
+							</li>
+							<li class="mui-table-view-cell mui-media">
+								<a href="#page2">
+									<img class="mui-media-object mui-pull-left" src="../img/ui.png">
+									<div class="mui-media-body">
+										木屋
+										<p class='mui-ellipsis'>想要这样一间小木屋，夏天挫冰吃瓜，冬天围炉取暖.</p>
+									</div>
+									<div class="mui-media-footer">
+										<span>15:33</span>
+
+										<div class="mui-pull-right">
+											<button class="mui-btn mui-btn-link app-btn-accept">接受TA</button>
+											<a class="mui-action-menu mui-icon mui-icon-plus" href="#opPopover"></a>
+
+										</div>
+									</div>
+								</a>
+
+							</li>
+							<li class="mui-table-view-cell mui-media">
+								<a href="javascript:;">
+									<img class="mui-media-object mui-pull-left" src="../img/ui.png">
+									<div class="mui-media-body">
+										CBD
+										<p class='mui-ellipsis'>烤炉模式的城，到黄昏，如同打翻的调色盘一般.</p>
+									</div>
+									<div class="mui-media-footer">
+										<span>15:33</span>
+										<span>已结束</span>
+									</div>
+								</a>
+							</li>
+							<li class="mui-table-view-cell mui-media">
+								<a href="#page2">
+									<img class="mui-media-object mui-pull-left" src="../img/ui.png">
+									<div class="mui-media-body">
+										木屋
+										<p class='mui-ellipsis'>想要这样一间小木屋，夏天挫冰吃瓜，冬天围炉取暖.</p>
+									</div>
+									<div class="mui-media-footer">
+										<span>15:33</span>
+
+										<div class="mui-pull-right">
+											<button class="mui-btn mui-btn-link app-btn-accept">接受TA</button>
+											<a class="mui-action-menu mui-icon mui-icon-plus" href="#opPopover"></a>
+
+										</div>
+									</div>
+								</a>
+
+							</li>
+							<li class="mui-table-view-cell mui-media">
+								<a href="javascript:;">
+									<img class="mui-media-object mui-pull-left" src="../img/ui.png">
+									<div class="mui-media-body">
+										CBD
+										<p class='mui-ellipsis'>烤炉模式的城，到黄昏，如同打翻的调色盘一般.</p>
+									</div>
+									<div class="mui-media-footer">
+										<span>15:33</span>
+										<span>已结束</span>
+									</div>
+								</a>
+							</li>-->
 						</ul>
 					</div>
 				</div>
 			</div>
+			
 			<!--页面主内容区结束-->
 		</div>
-		<div id="opPopover" class="mui-popover mui-bar-popover">
+		<!--<div id="opPopover" class="mui-popover mui-bar-popover">
 			<div class="mui-popover-arrow"></div>
 			<ul class="mui-table-view">
 				<li class="mui-table-view-cell">
@@ -109,7 +202,7 @@
 
 			</ul>
 
-		</div>
+		</div>-->
 
 		<script id='opPopover-template' type="text/template">
 			<% for(var i in record){ var item=record[i]; %>
@@ -222,7 +315,7 @@
 			<!--页面标题栏结束-->
 			<!--页面主内容区开始-->
 			<div class="mui-page-content">
-				<div class="mui-scroll-wrapper">
+				<div class="mui-scroll-wrapper app-chat-wrapper">
 					<div class="mui-scroll">
 
 						<div class='msg-list'>
@@ -231,14 +324,19 @@
 				</div>
 				<footer>
 					<div class="footer-left">
-						<i class="mui-icon mui-icon-camera msg-image" style="font-size: 28px;"></i>
+						<i class="mui-icon mui-icon-camera msg-image" <% if(user.candStatus==8 ) { %>disabled="disabled" <%}%> style="font-size: 28px;"></i>
 					</div>
 					<div class="footer-center">
-						<textarea type="text" class='input-text msg-text'></textarea>
-						<button type="button" class='input-sound msg-sound' style="display: none;">按住说话</button>
+						<% if(user.candStatus==8 ) { %>
+							<textarea type="text" class='input-text msg-text' disabled="disabled" placeholder="已结束"></textarea>
+							<button type="button" class='input-sound msg-sound' style="display: none;" disabled="disabled">按住说话</button>
+						<%} else {%>
+							<textarea type="text" class='input-text msg-text' ></textarea>
+							<button type="button" class='input-sound msg-sound' style="display: none;">按住说话</button>
+						<%}%>
 					</div>
 					<label for="" class="footer-right">
-						<i class="mui-icon mui-icon-mic msg-type"></i>
+						<i class="mui-icon mui-icon-mic msg-type" <% if(user.candStatus==8 ) { %>disabled="disabled" <%}%>></i>
 					</label>
 				</footer>
 				<div class="rprogress sound-alert">
@@ -305,7 +403,8 @@
 			<% } %>
 		</script>
 		<script src="../js/mui.min.js"></script>
-		<script src="../js/mui.view.js "></script>
+		<script src="../js/mui.view.js"></script>
+		<script src="../js/trd/iscroll-probe.js"></script>
 		<script src="../js/mui.imageViewer.js"></script>
 		<script src="../js/trd/NIM_Web_SDK_v3.4.0.js"></script>
 		<script src="../js/trd/NIM_Web_NIM_v3.4.0.js"></script>

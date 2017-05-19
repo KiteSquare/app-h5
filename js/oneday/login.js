@@ -76,18 +76,17 @@ od.login = {
 			plus.storage.setItem("sdktoken",info.sdktoken);
 //			$.cookie('sdktoken',info.sdktoken,{expires:360,path:'/'});
 		}
-		var chatwebview = plus.webview.getWebviewById("friends.html");
-		if (chatwebview) {
-			chatwebview.reload();
-		}
+		var main = plus.webview.getWebviewById( plus.runtime.appid );   
+        mui.fire(main,'refresh');
+		
+		
 		if (info && info.url) {
 			mui.openWindow({
 				url: info.url, 
 				id: info.url
 			});
 		} else {
-			var mainPage = plus.webview.currentWebview().opener().parent();	
-			mainPage.show();
+			main.show();
 		}
 		plus.webview.currentWebview().close();
 	}

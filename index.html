@@ -70,6 +70,14 @@
 				}
 				self.append(sub);
 			}
+			var self = plus.webview.currentWebview();
+		    window.addEventListener('refresh',function(event){   //监听自定义事件
+		        var chidrens = self.children(),i=0;
+		        for(;i<chidrens.length;i++){
+		        	chidrens[i].reload(true);
+		        }
+		    });
+			
 		});
  		//当前激活选项
 		var activeTab = subpages[0];
@@ -109,6 +117,8 @@
 				defaultTab.classList.add('mui-active');
 			}
 		});
+		
+		
 		
 	</script>
 </html>

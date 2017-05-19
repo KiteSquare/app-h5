@@ -4,6 +4,8 @@ od.chat = od.chat || {};
 od.friend = {
 	chatScrollArr: {},
 	CHAT_PAGE_ID_PRE: "page-",
+	currentPage: 0,
+	lastPage:false,
 	ui: {
 		friends: document.querySelector('#friends'),
 		body: document.querySelector('body'),
@@ -14,9 +16,9 @@ od.friend = {
 			userId = plus.storage.getItem("uid");
 		var btnArray = ['取消', '确认'];
 		mui.confirm('接受TA的请求将会永远能与TA保持聊天，但是同时会自动拒绝之前已接受的人，因为只能接受一个人哦~~点击确认继续', '确认', btnArray, function(e) {
-			if (e.index == 0) {
+			if(e.index == 0) {
 				return;
-			} 
+			}
 			mui.ajax(
 				od.host + "/oneday/willow/accept", {
 					type: "post",
@@ -33,16 +35,16 @@ od.friend = {
 					timeout: 10000
 				}
 			);
-		})	
-			
+		})
+
 	},
 	onOpClick: function(e) {
 		var type = this.getAttribute("msg-type");
-		if (type=='accept') {
-			od.friend.onAcceptedClick.call(this,e);
-		} else if (type=='reject') {
-			od.friend.onRejectClick.call(this,e);
-		} else if (type=='tipoff') {
+		if(type == 'accept') {
+			od.friend.onAcceptedClick.call(this, e);
+		} else if(type == 'reject') {
+			od.friend.onRejectClick.call(this, e);
+		} else if(type == 'tipoff') {
 			mui.toast("敬请期待");
 		}
 	},
@@ -51,9 +53,9 @@ od.friend = {
 			userId = plus.storage.getItem("uid");
 		var btnArray = ['取消', '确认'];
 		mui.confirm('拒绝TA的请求将不能再与TA聊天~~点击确认继续', '确认', btnArray, function(e) {
-			if (e.index == 0) {
+			if(e.index == 0) {
 				return;
-			} 
+			}
 			mui.ajax(
 				od.host + "/oneday/willow/reject", {
 					type: "post",
@@ -70,12 +72,12 @@ od.friend = {
 					timeout: 10000
 				}
 			);
-		})	
-			
+		})
+
 	},
 	onAcceptedClickSuccess: function(data) {
 		if(data.code && data.code == "0") {
-//			mui.toast('success');
+			//			mui.toast('success');
 			plus.webview.currentWebview().reload();
 		} else {
 			mui.toast(data.message);
@@ -83,7 +85,7 @@ od.friend = {
 	},
 	onRejectClickSuccess: function(data) {
 		if(data.code && data.code == "0") {
-//			mui.toast('success');
+			//			mui.toast('success');
 			plus.webview.currentWebview().reload();
 		} else {
 			mui.toast(data.message);
@@ -116,19 +118,28 @@ od.friend = {
 				od.friend.cache.setPersonlist(data.data.history.data);
 				console.log(od.friend.cache);
 				users = users.concat(data.data.history.data);
-				od.friend.ui.friends.innerHTML = html + template('friends-template', {
-					"record": users
-				});
-				od.friend.renderOpPopover(users);
-				od.friend.renderChatContents(users);
+				
+				var i=0,obj, users1=[];
+				for(;i<users.length; i++) {
+					obj = document.getElementById("user-" + users[i]['id']);
+					if (!obj) {
+						users1.push(users[i]);
+					}
+				}
+				od.friend.currentPage=data.data.history.currentPage;
+				od.friend.lastPage=data.data.history.lastPage;
+				od.friend.ui.friends.insertAdjacentHTML('beforeend',  html + template('friends-template', {
+					"record": users1
+				}));
+				od.friend.renderOpPopover(users1);
+				od.friend.renderChatContents(users1);
 			}
-			//初始化聊天组件
-
-			od.chat.inits();
+			
 			//			od.friend.listScroll.refresh();
 		} else {
 			alert(data.message);
 		}
+		od.friend.listScroll.refresh();
 	},
 	bindAcceptedClickEvent: function() {
 		mui("#friends").on("tap", ".app-btn-accept", od.friend.onAcceptedClick);
@@ -136,12 +147,61 @@ od.friend = {
 	bindOpClickEvent: function() {
 		mui(".mui-fullscreen").on("tap", ".mui-popover a", od.friend.onOpClick);
 	},
+	bindDropEvent: function() {
+		od.friend.page = 0;
+		od.friend.size = 10;
+		od.friend.listScrollType = 0;
+		od.friend.listScroll = new IScroll('#app-friends-wrapper',
+				{
+//					scrollY: true,
+//					preventDefault: false, 
+					probeType: 1,
+                	tap: false,
+                	click: false,
+                	preventDefaultException: {tagName: /.*/},
+                	mouseWheel: true,
+                	scrollbars: true,
+                	fadeScrollbars: true,
+                	interactiveScrollbars: false,
+                	keyBindings: false,
+                	deceleration: 0.0002
+				});
+		document.addEventListener('touchmove', false);
+        od.friend.listScroll.on('scroll', od.friend.onListScroll);
+        od.friend.listScroll.on('scrollEnd', od.friend.onListScrollEnd);
+        od.friend.listScroll.refresh();
+	},
+	/**
+	 * 下拉过程
+	 */
+	onListScroll: function() {
+		var distance = this.y - this.maxScrollY;
+		console.log(this.y+"---"+distance);
+		if (distance < -100) {
+			od.friend.listScrollType = 1;
+		}
+	},
+	/**
+	 * 下拉结束
+	 */
+	onListScrollEnd: function() {
+		
+		console.log('scroll ended');
+        console.log(this);
+		console.log(this.y+"---");
+		if (od.friend.listScrollType == 1 && !od.friend.lastPage) {
+//			plus.webview.currentWebview().reload();
+			od.friend.loadFriends();
+		}
+		od.friend.listScrollType = 0;
+	},
 	renderOpPopover: function(users) {
 		if(!users || users.length == 0) {
 			return;
 		}
+		
 		od.friend.ui.body.insertAdjacentHTML('beforeend', template('opPopover-template', {
-				"record": users
+			"record": users
 		}));
 	},
 	renderChatContents: function(users) {
@@ -162,15 +222,32 @@ od.friend = {
 		od.chat.initChats(users);
 	},
 	initPage: function() {
-
 		//初始化单页view
 		var viewApi = mui('#app').view({
 			defaultPage: '#menu'
 		});
-		//初始化图片查看器
-		//		od.friend.imageViewer = new mui.ImageViewer('.msg-content-image', {
-		//			dbl: false
-		//		});
+		mui.init({
+			gestureConfig: {
+				tap: true, //默认为true
+				doubletap: true, //默认为false
+				longtap: true, //默认为false
+				swipe: true, //默认为true
+				drag: true, //默认为true
+				hold: true, //默认为false，不监听
+				release: true //默认为false，不监听
+			},
+//			pullRefresh: {
+//				container: '#app-friends-wrapper',
+//				down: {
+//					callback: od.friend.pulldownRefresh
+//				},
+//				up: {
+//					contentrefresh: '正在加载...',
+//					callback: od.friend.pullupRefresh
+//				}
+//			}
+		});
+		
 		//处理view的后退与webview后退
 		var view = viewApi.view;
 		var oldBack = mui.back;
@@ -202,9 +279,28 @@ od.friend = {
 			//				console.log(e.detail.page.id + ' beforeShow');
 		});
 
-		od.friend.loadFriends();
-
 	},
+	pulldownRefresh: function() {
+		setTimeout(function() {
+			mui('#app-friends-wrapper').pullRefresh().endPulldownToRefresh(); //refresh completed
+		}, 1500);
+	},
+	pullupRefresh: function() {
+		setTimeout(function() {
+			//					mui('#pullrefresh').pullRefresh().endPullupToRefresh((++count > 2)); //参数为true代表没有更多数据了。
+			//					var table = document.body.querySelector('.mui-table-view');
+			//					var cells = document.body.querySelectorAll('.mui-table-view-cell');
+			//					for (var i = cells.length, len = i + 20; i < len; i++) {
+			//						var li = document.createElement('li');
+			//						li.className = 'mui-table-view-cell';
+			//						li.innerHTML = '<a class="mui-navigate-right">Item ' + (i + 1) + '</a>';
+			//						table.appendChild(li);
+			//					}
+			alert(1500);
+			mui('#app-friends-wrapper').pullRefresh().endPullupToRefresh(false);
+		}, 1500);
+	},
+	
 	loadFriends: function() {
 		var uid = plus.storage.getItem("uid");
 		if(uid === undefined) {
@@ -213,9 +309,10 @@ od.friend = {
 			return;
 		}
 		//		$("#content").html("");
-		od.friend.ui.friends.innerHTML = '';
+//		od.friend.ui.friends.innerHTML = '';
 		mui.ajax(
-			od.host + "/oneday/willow/info/" + uid, {
+			od.host + "/oneday/willow/info/" + uid + "?currentPage="+(od.friend.currentPage+1)+"&count=1", 
+			{
 				type: "get",
 				dataType: "json",
 				success: od.friend.onLoadFriends,
@@ -227,26 +324,6 @@ od.friend = {
 			}
 		);
 	},
-	getUser: function() {
-		var uid = od.base.getUid(true);
-		if(uid === undefined) {
-			alert("请先登录");
-			return;
-		}
-		$.ajax({
-			type: "get",
-			dataType: "json",
-			url: od.host + "/oneday/user/" + uid,
-			async: true,
-			success: od.friend.onGetUserInfoSuccess,
-			error: function(e) {
-				console.log(e);
-				alert(e);
-			},
-			timeout: 10000
-		});
-
-	},
 	onGetUserInfoSuccess: function(data) {
 		//		console.log(data);
 		if(data.code && data.code != "0") {
@@ -256,7 +333,7 @@ od.friend = {
 
 		od.friend.cache.setPersonlist([data.data]);
 	},
-	refresh: function(){
+	refresh: function() {
 		plus.webview.currentWebview().reload();
 	},
 	inits: function() {
@@ -265,21 +342,25 @@ od.friend = {
 		//		$.cookie('sdktoken',"7",{expires:7,path:'/'});
 		od.friend.cache = new Cache();
 		template.config('escape', false);
+		//初始化页面
 		od.friend.initPage();
+		//初始化聊天组件
+		od.chat.inits();
+		
 		plus.webview.currentWebview().setStyle({
 			softinputMode: "adjustResize"
 		});
+		//绑定相关事件
 		od.friend.bindAcceptedClickEvent();
 		od.friend.bindOpClickEvent();
+		od.friend.bindDropEvent();
 		//		od.base.currentViewId="view-list";
 
 		//		od.friend.getUser();
 
-		
-				
 		////		od.friend.bindUserClickEvent();
 		//		od.friend.bindChatClickEvent();
-		//		od.friend.bindDropEvent();
+		//		
 		//		od.friend.bindSendBtnClick();
 		//		od.friend.bindWebviewShowEvent();
 		//		document.addEventListener('touchmove', false);
@@ -291,12 +372,11 @@ od.chat = {
 	MIN_SOUND_TIME: 800,
 	ui: {},
 	inits: function() {
-		od.chat.initModule();
+		if (!od.isNull(window.nim)) {
+			return;
+		}
 		od.chat.initEvents();
 		od.chat.initSDKBridge();
-	},
-	initModule: function() {
-		od.chat.cache = new Cache();
 	},
 	initEvents: function() {
 		//		$("#view-chat .chat-send").click(od.chat.onSendClick);
@@ -318,7 +398,7 @@ od.chat = {
 		mui("#" + topObjId).on('tap', '.msg-img', od.chat.onUserHeadTap);
 	},
 	onUserHeadTap: function(e) {
-		var uid =this.getAttribute('msg-uid'),
+		var uid = this.getAttribute('msg-uid'),
 			url;
 		if(!uid) {
 			return;
@@ -338,12 +418,12 @@ od.chat = {
 			});
 		}
 
-		if(mui.os.ios) {
-			view.show(url);
-		} else {
-			//否则，使用fade-in动画，且保存变量
-			view.show(url, "fade-in", 300);
-		}
+//		if(mui.os.ios) {
+//			view.show(url);
+//		} else {
+//			//否则，使用fade-in动画，且保存变量
+//			view.show(url, "fade-in", 300);
+//		}
 	},
 	showKeyboard: function() {
 		if(mui.os.ios) {
@@ -381,11 +461,13 @@ od.chat = {
 		if(users.length <= 0) {
 			return;
 		}
+		od.chat.initLocalMsgs(users);
 		for(var i = 0; i < users.length; i++) {
 			od.chat.initChat(users[i]);
 			od.chat.bindMsgContentTap(users[i].id);
 			od.chat.bindUserTap(users[i].id);
 		}
+		od.chat.updateSessionsUI(od.chat.data.sessions);
 	},
 	updateChat: function(id) {
 		var topObjId = od.friend.CHAT_PAGE_ID_PRE + id,
@@ -397,7 +479,7 @@ od.chat = {
 	initChat: function(user) {
 
 		//$.plusReady=function(fn){fn();};
-		var topObjId = od.friend.CHAT_PAGE_ID_PRE + user.id;
+		var topObjId = od.friend.CHAT_PAGE_ID_PRE + user.id, isDisable=(user.candStatus==8);
 		var record = [{
 			sender: 'zs',
 			type: 'text',
@@ -479,6 +561,14 @@ od.chat = {
 				ui.boxMsgText.focus();
 			}, 150);
 		}
+		
+		
+		//已经结束，则直接返回
+		if (isDisable) {
+			return;
+		}
+		
+		
 		//解决长按“发送”按钮，导致键盘关闭的问题；
 		ui.footerRight.addEventListener('touchstart', function(event) {
 			if(ui.btnMsgType.classList.contains('mui-icon-paperplane')) {
@@ -869,16 +959,12 @@ od.chat = {
 	//		}
 	//
 	//	},
-	initLocalMsgs: function() {
-		if(!od.friend.cache || od.friend.cache.getPersonlist().length <= 0) return;
-		var user, persons = od.friend.cache.getPersonlist();
-		for(var uid in persons) {
-			if(uid == "undefined" || uid == undefined) {
-				continue;
-			}
-			user = persons[uid];
-			if(!user) continue;
-			od.chat.initLocalMsgsByUser(uid, 50, Date.parse(new Date()));
+	initLocalMsgs: function(users) {
+		if(!users || users.length <= 0) return;
+		var user, i=0, timestamp=Date.parse(new Date());
+		for(;i<users.length;i++) {
+			user = users[i];
+			od.chat.initLocalMsgsByUser(user.id, 50, timestamp);
 		}
 	},
 	initSDKBridge: function() {
@@ -942,6 +1028,9 @@ od.chat = {
 	updateSessionsUI: function(sessions) {
 		// 刷新界面
 		console.log('刷新界面');
+		if (od.isNull(sessions)) {
+			return;
+		}
 		var session;
 		for(var i = 0; i < sessions.length; i++) {
 			session = sessions[i];
@@ -1037,16 +1126,21 @@ od.chat = {
 	 */
 	refreshUnread: function(uid, count) {
 		if(!uid) {
-			return;
+			return false;
 		}
 		if(count == null || count <= 0) {
-			od.chat.clearUnread(uid);
-			return;
+			return od.chat.clearUnread(uid);
 		}
 		//		var hisu = $("#his-u-" + uid) ;
 		var hisu = document.querySelector("#user-" + uid + " .mui-badge");
-		hisu.innerHTML = count;
-		hisu.style.display = "block";
+		if (hisu) {
+			hisu.innerHTML = count;
+			hisu.style.display = "block";
+			return true;
+		} else {
+			return false;
+		}
+		
 	},
 	/**
 	 * 
@@ -1054,8 +1148,14 @@ od.chat = {
 	 */
 	clearUnread: function(uid) {
 		var hisu = document.querySelector("#user-" + uid + " .mui-badge");
-		hisu.innerHTML = "";
-		hisu.style.display = "none";
+		if (hisu) {
+			hisu.innerHTML = "";
+			hisu.style.display = "none";
+			return true;
+		} else {
+			return false;
+		}
+		
 	},
 	/**
 	 * 设置当前session
@@ -1073,7 +1173,7 @@ od.chat = {
 	initLocalMsgsByUser: function(uid, limit, endTime) {
 		if(!uid) return;
 		var sessionId = "p2p-" + uid;
-		if(!nim) {
+		if(od.isNull(nim)) {
 			return;
 		}
 		var chatObj = mui("#" + od.friend.CHAT_PAGE_ID_PRE + uid);
@@ -1195,10 +1295,13 @@ od.chat = {
 	},
 	onConnect: function() {
 		console && console.log('连接成功');
-		od.chat.initLocalMsgs();
+		//初始化朋友列表
+		od.friend.loadFriends();
 	},
 	onError: function(e) {
 		console && console.log('失败onError', e);
+		//初始化朋友列表
+		od.friend.loadFriends();
 	},
 	onwillreconnect: function(e) {
 		console && console.log('onwillreconnect', e);
@@ -1253,7 +1356,11 @@ od.chat = {
 	},
 	refreshUserUI: function(id, msgs, isHistory) {
 		if(msgs.length <= 0) {
-			return;
+			return true;
+		}
+		var ui = od.chat.ui[id];
+		if (!ui) {
+			return false;
 		}
 		var i = 0,
 			head = plus.storage.getItem('head'),
@@ -1268,7 +1375,7 @@ od.chat = {
 				msgs[i].head = friend['head'];
 			}
 		}
-		var ui = od.chat.ui[id];
+		
 		if(isHistory) {
 			ui.areaMsgList.insertAdjacentHTML('afterbegin', template('msg-template', {
 				"record": msgs
@@ -1325,10 +1432,14 @@ od.chat = {
 		if(!Array.isArray(msgs)) {
 			msgs = [msgs];
 		}
-		var sessionId = msgs[0].sessionId;
+		var uid = msgs[0].target;
 		od.chat.data.msgs = od.chat.data.msgs || {};
-		od.chat.data.msgs[sessionId] = nim.mergeMsgs(od.chat.data.msgs[sessionId], msgs);
-
+		od.chat.data.msgs[uid] = nim.mergeMsgs(od.chat.data.msgs[uid], msgs);
+//		var res = od.chat.refreshUserUI(uid, obj.msgs);
+//		if (!res) {
+//			od.chat.data.msgs[uid] = msgs;
+//		}
+		
 	},
 	//	refreshTextUI: function(msg, isHistory) {
 	//		if(!msg) {
@@ -1397,17 +1508,7 @@ od.chat = {
 	//		od.base.forward('view-list', 'right');
 	//	}
 }
-mui.init({
-	gestureConfig: {
-		tap: true, //默认为true
-		doubletap: true, //默认为false
-		longtap: true, //默认为false
-		swipe: true, //默认为true
-		drag: true, //默认为true
-		hold: true, //默认为false，不监听
-		release: true //默认为false，不监听
-	}
-});
 mui.plusReady(function() {
 	od.friend.inits();
 });
+//od.friend.inits();

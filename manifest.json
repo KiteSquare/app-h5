@@ -165,27 +165,27 @@
 			"splashscreen": {
 				"ios": {
 					"iphone": {
-						"default": "", /*iPhone3启动图片选，分辨率：320x480*/
-						"retina35": "",/*3.5英寸设备(iPhone4)启动图片，分辨率：640x960*/
-						"retina40": ""
+						"default": "img/splash.png", /*iPhone3启动图片选，分辨率：320x480*/
+						"retina35": "img/splash.png",/*3.5英寸设备(iPhone4)启动图片，分辨率：640x960*/
+						"retina40": "img/splash.png","retina55":"img/splash.png","retina47":"img/splash.png","retina55l":"img/splash.png"
 					},
 					"ipad": {
-						"portrait": "", /*iPad竖屏启动图片，分辨率：768x1004*/
-						"portrait-retina": "",/*iPad高分屏竖屏图片，分辨率：1536x2008*/
-						"landscape": "", /*iPad横屏启动图片，分辨率：1024x748*/
-						"landscape-retina": "", /*iPad高分屏横屏启动图片，分辨率：2048x1496*/
-						"portrait7": "", /*iPad iOS7竖屏启动图片，分辨率：768x1024*/
-						"portrait-retina7": "",/*iPad iOS7高分屏竖屏图片，分辨率：1536x2048*/
-						"landscape7": "", /*iPad iOS7横屏启动图片，分辨率：1024x768*/
-						"landscape-retina7": ""
+						"portrait": "img/splash.png", /*iPad竖屏启动图片，分辨率：768x1004*/
+						"portrait-retina": "img/splash.png",/*iPad高分屏竖屏图片，分辨率：1536x2008*/
+						"landscape": "img/splash.png", /*iPad横屏启动图片，分辨率：1024x748*/
+						"landscape-retina": "img/splash.png", /*iPad高分屏横屏启动图片，分辨率：2048x1496*/
+						"portrait7": "img/splash.png", /*iPad iOS7竖屏启动图片，分辨率：768x1024*/
+						"portrait-retina7": "img/splash.png",/*iPad iOS7高分屏竖屏图片，分辨率：1536x2048*/
+						"landscape7": "img/splash.png", /*iPad iOS7横屏启动图片，分辨率：1024x768*/
+						"landscape-retina7": "img/splash.png"
 					}
 				},
 				"android": {
-					"mdpi": "", /*普通屏启动图片，分辨率：240x282*/
-					"ldpi": "", /*大屏启动图片，分辨率：320x442*/
-					"hdpi": "", /*高分屏启动图片，分辨率：480x762*/
-					"xhdpi": "", /*720P高分屏启动图片，分辨率：720x1242*/
-					"xxhdpi": ""
+					"mdpi": "img/splash.png", /*普通屏启动图片，分辨率：240x282*/
+					"ldpi": "img/splash.png", /*大屏启动图片，分辨率：320x442*/
+					"hdpi": "img/splash.png", /*高分屏启动图片，分辨率：480x762*/
+					"xhdpi": "img/splash.png", /*720P高分屏启动图片，分辨率：720x1242*/
+					"xxhdpi": "img/splash.png"
 				}
 			}
 		}
@@ -253,7 +253,8 @@
 					"js/trd/NIM_Web_SDK_v3.4.0.js",
 					"js/trd/NIM_Web_NIM_v3.4.0.js",
 					"css/mui.imageviewer.css",
-					"css/app.css"
+					"css/app.css",
+					"js/trd/iscroll-probe.js"
 				],
 				"refer": [
 					"template/detail.html"
@@ -262,7 +263,8 @@
 			},
 			"template/setting.html": {
 				"resources": [
-					"js/mui.view.js"
+					"js/mui.view.js",
+					"fonts/mui.ttf"
 				],
 				"refer": [
 					"template/login.html"

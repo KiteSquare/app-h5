@@ -98,6 +98,9 @@ body {
 	background-color: #efeff4;
 }
 
+#app-friends-wrapper .mui-scroll{
+	min-height: 101%;
+}
 .mui-page.mui-transitioning {
 	-webkit-transition: -webkit-transform 300ms ease;
 	transition: transform 300ms ease;
@@ -313,9 +316,17 @@ footer {
 	padding: 0 0px 50px;
 }
 .mui-scroll-wrapper, .mui-scroll{
+/*	height: 100%;*/
+}
+.app-chat-wrapper{
 	height: 100%;
 }
-
+.app-chat-wrapper .mui-scroll{
+	height: 100%;
+}
+#app-friends-wrapper{
+	/*overflow-y: scroll;*/
+}
 .msg-item {
 	padding: 8px;
 	clear: both;
