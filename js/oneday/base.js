@@ -1,5 +1,7 @@
 od = window.od ||{};
-od.host = od.host || "http://10.12.194.127";
+//od.host = od.host || "http://10.12.194.127";
+od.host = od.host || "http://182.61.40.58";
+
 od.base = od.base || {};
 /**
  * 获取地址栏的参数
