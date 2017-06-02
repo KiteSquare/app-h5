@@ -1,3 +1,7 @@
+.mui-table-view {
+	margin-top: 20px;
+}
+
 textarea,
 pre {
 	margin: 0;
@@ -5,16 +9,19 @@ pre {
 	outline: 0;
 	border: 0;
 }
-.mui-popup-button{
+
+.mui-popup-button {
 	color: #000000;
 }
-.mui-dtpicker  .mui-btn-blue{
+
+.mui-dtpicker .mui-btn-blue {
 	background-color: #030303;
-	border-color:  #030303;
+	border-color: #030303;
 }
-.mui-poppicker  .mui-btn-blue{
+
+.mui-poppicker .mui-btn-blue {
 	background-color: #030303;
-	border-color:  #030303;
+	border-color: #030303;
 }
 
 .expandingArea {
@@ -64,4 +71,18 @@ pre {
 	display: block;
 	/* Hide the text; just using it for sizing */
 	visibility: hidden;
+}
+
+#head-img {
+	position: absolute;
+	bottom: 10px;
+	right: 40px;
+	width: 40px;
+	height: 40px;
+}
+.head {
+    height: 40px;
+}
+#head {
+    line-height: 40px;
 }

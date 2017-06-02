@@ -1,0 +1,84 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link href="../css/oneday/profile.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../css/mui.picker.min.css" />
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">个人主页设置</h1>
+		</header>
+		<div class="mui-content">
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell">
+					<a id="head" class="mui-navigate-right">头像
+						<span class="mui-pull-right head">
+							<img class="head-img mui-action-preview" id="head-img" src=""/>
+						</span>
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a id="name" data-name='Abel'>昵称<span class="mui-pull-right">able</span></a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a id="signature" data-signature="曾经沧海难为水，除却巫山不是云">签名
+						<p style="text-indent:2em">曾经沧海难为水，除却巫山不是云</p>
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a id="sex" data-sex="1">性别<span class="mui-pull-right">男</span></a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a id="birth" data-birth="1980-07-01">生日<span class="mui-pull-right">1980-07-01</span></a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a id="height" data-height="170">身高<span class="mui-pull-right">170cm</span></a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a id="weight" data-weight="60">体重<span class="mui-pull-right">60kg</span></a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a id="education" data-education="2">学历<span class="mui-pull-right">本科</span></a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a id="income" data-income="2">收入<span class="mui-pull-right">1000-2000</span></a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a id="marriage" data-marriage="1">婚姻状态<span class="mui-pull-right">未婚</span></a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a id="city" data-city="110101">城市<span class="mui-pull-right">东城区</span></a>
+				</li>
+			</ul>
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell">
+					<a>个人简介</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<div id="info-detail" class="expandingArea ">
+						<pre><span></span><br></pre>
+						<textarea placeholder="多行文本框" style="border: none;"></textarea>
+					</div>
+
+				</li>
+				<li class="mui-table-view-cell">
+					<button class="footer-center">更新简介</button>
+				</li>
+			</ul>
+		</div>
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/oneday/profile.js"></script>
+		<script src="../js/mui.picker.min.js"></script>
+		<script src="../js/mui.picker.js"></script>
+		<script src="../js/mui.poppicker.js"></script>
+		<script src="../js/city.data.js" type="text/javascript" charset="utf-8"></script>
+	</body>
+
+</html>

@@ -1,97 +1,161 @@
 od = window.od || {};
-od.setting = {
+od.profile = {
 	inits: function() {
-		od.setting.initEvents();
+		mui.init();
+		od.profile.initEvents();
 	},
 	initEvents: function() {
-		od.setting.bindNameTap();
-		od.setting.bindSignatureTap();
-		od.setting.bindSexTap();
-		od.setting.bindBirthTap();
-		od.setting.bindHeightTap();
-		od.setting.bindWeightTap();
-		od.setting.bindEducationTap();
-		od.setting.bindIncomeTap();
-		od.setting.bindMarriageTap();
-		od.setting.bindCityTap();
-		od.setting.bindInfoDetailEvent();
+		od.profile.bindHeadTap();
+		od.profile.bindNameTap();
+		od.profile.bindSignatureTap();
+		od.profile.bindSexTap();
+		od.profile.bindBirthTap();
+		od.profile.bindHeightTap();
+		od.profile.bindWeightTap();
+		od.profile.bindEducationTap();
+		od.profile.bindIncomeTap();
+		od.profile.bindMarriageTap();
+		od.profile.bindCityTap();
+		od.profile.bindInfoDetailEvent();
 	},
-	bindTapEvent: function(){
-		mui('.mui-page').on('tap', '.mui-table-view-cell a', function(e) {
-			var targetTab = this.getAttribute('href');
-			//更换标题
-			//				title.innerHTML = this.querySelector('.mui-tab-label').innerHTML;
-			//显示目标选项卡
-			//若为iOS平台或非首次显示，则直接显示
-
-			var view = plus.webview.getWebviewById(targetTab);
-			if(!view) {
-//				view = mui.preload({
-				view = mui.openWindow({
-					url: targetTab,
-					id: targetTab, //默认使用当前页面的url作为id
-					styles: {
-						top: '0',
-						bottom: '0'
-					}, //窗口参数
-					extras: {} //自定义扩展参数
-				});
-			} else {
-				if(mui.os.ios) {
-					view.show(targetTab);
-				} else {
-					//否则，使用fade-in动画，且保存变量
-					view.show(targetTab, "fade-in", 300);
-				}
+	bindHeadTap: function() {
+		//更换头像
+		mui(".mui-table-view-cell").on("tap", "#head", function(e) {
+			if(mui.os.plus){
+				var a = [{
+					title: "拍照"
+				}, {
+					title: "从手机相册选择"
+				}];
+				plus.nativeUI.actionSheet({
+					title: "修改头像",
+					cancel: "取消",
+					buttons: a
+				}, function(b) {
+					switch (b.index) {
+						case 0:
+							break;
+						case 1:
+							od.profile.getImage();
+							break;
+						case 2:
+							od.profile.galleryImg();
+							break;
+						default:
+							break
+					}
+				})	
 			}
-
 			
 		});
 	},
+	getImage: function() {
+		var c = plus.camera.getCamera();
+			c.captureImage(function(e) {
+				plus.io.resolveLocalFileSystemURL(e, function(entry) {
+					var s = entry.toLocalURL() + "?version=" + new Date().getTime();
+					console.log(s);
+					document.getElementById("head-img").src = s;
+					//变更大图预览的src
+					//目前仅有一张图片，暂时如此处理，后续需要通过标准组件实现
+					document.querySelector("#__mui-imageview__group .mui-slider-item img").src = s + "?version=" + new Date().getTime();
+				}, function(e) {
+					console.log("读取拍照文件错误：" + e.message);
+				});
+			}, function(s) {
+				console.log("error" + s);
+			}, {
+				filename: "_doc/head.jpg"
+			})
+	},
+	galleryImg: function() {
+		plus.gallery.pick(function(a) {
+				plus.io.resolveLocalFileSystemURL(a, function(entry) {
+					plus.io.resolveLocalFileSystemURL("_doc/", function(root) {
+						root.getFile("head.jpg", {}, function(file) {
+							//文件已存在
+							file.remove(function() {
+								console.log("file remove success");
+								entry.copyTo(root, 'head.jpg', function(e) {
+										var e = e.fullPath + "?version=" + new Date().getTime();
+										document.getElementById("head-img").src = e;
+										//变更大图预览的src
+										//目前仅有一张图片，暂时如此处理，后续需要通过标准组件实现
+										document.querySelector("#__mui-imageview__group .mui-slider-item img").src = e + "?version=" + new Date().getTime();;
+									},
+									function(e) {
+										console.log('copy image fail:' + e.message);
+									});
+							}, function() {
+								console.log("delete image fail:" + e.message);
+							});
+						}, function() {
+							//文件不存在
+							entry.copyTo(root, 'head.jpg', function(e) {
+									var path = e.fullPath + "?version=" + new Date().getTime();
+									document.getElementById("head-img").src = path;
+									//变更大图预览的src
+									//目前仅有一张图片，暂时如此处理，后续需要通过标准组件实现
+									document.querySelector("#__mui-imageview__group .mui-slider-item img").src = path;
+								},
+								function(e) {
+									console.log('copy image fail:' + e.message);
+								});
+						});
+					}, function(e) {
+						console.log("get _www folder fail");
+					})
+				}, function(e) {
+					console.log("读取拍照文件错误：" + e.message);
+				});
+			}, function(a) {}, {
+				filter: "image"
+			})
+	},
 	bindNameTap: function() {
 		var birthObj = document.getElementById("name");
-		birthObj.addEventListener("tap", od.setting.onNameTap, false);
+		birthObj.addEventListener("tap", od.profile.onNameTap, false);
 	},
 	bindSignatureTap: function() {
 		var birthObj = document.getElementById("signature");
-		birthObj.addEventListener("tap", od.setting.onSignatureTap, false);
+		birthObj.addEventListener("tap", od.profile.onSignatureTap, false);
 	},
 	bindSexTap: function() {
 		var birthObj = document.getElementById("sex");
-		birthObj.addEventListener("tap", od.setting.onSexTap, false);
+		birthObj.addEventListener("tap", od.profile.onSexTap, false);
 	},
 	bindBirthTap: function() {
 		var birthObj = document.getElementById("birth");
-		birthObj.addEventListener("tap", od.setting.onBirthTap, false);
+		birthObj.addEventListener("tap", od.profile.onBirthTap, false);
 	},
 	bindHeightTap: function() {
 		var obj = document.getElementById("height");
-		obj.addEventListener("tap", od.setting.onHeightTap, false);
+		obj.addEventListener("tap", od.profile.onHeightTap, false);
 	},
 	bindWeightTap: function() {
 		var obj = document.getElementById("weight");
-		obj.addEventListener("tap", od.setting.onWeightTap, false);
+		obj.addEventListener("tap", od.profile.onWeightTap, false);
 	},
 
 	bindEducationTap: function() {
 		var obj = document.getElementById("education");
-		obj.addEventListener("tap", od.setting.onEducationTap, false);
+		obj.addEventListener("tap", od.profile.onEducationTap, false);
 	},
 	bindIncomeTap: function() {
 		var obj = document.getElementById("income");
-		obj.addEventListener("tap", od.setting.onIncomeTap, false);
+		obj.addEventListener("tap", od.profile.onIncomeTap, false);
 	},
 	bindMarriageTap: function() {
 		var obj = document.getElementById("marriage");
-		obj.addEventListener("tap", od.setting.onMarriageTap, false);
+		obj.addEventListener("tap", od.profile.onMarriageTap, false);
 	},
 	bindCityTap: function() {
 		var obj = document.getElementById("city");
-		obj.addEventListener("tap", od.setting.onCityTap, false);
+		obj.addEventListener("tap", od.profile.onCityTap, false);
 	},
 	bindInfoDetailEvent: function() {
 		var areas = document.getElementById('info-detail');
-		od.setting.makeExpandingArea(areas);
+		od.profile.makeExpandingArea(areas);
 	},
 	onNameTap: function(e) {
 		e.detail.gesture.preventDefault(); //修复iOS 8.x平台存在的bug，使用plus.nativeUI.prompt会造成输入法闪一下又没了
@@ -570,5 +634,6 @@ od.setting = {
 	},
 
 }
-
-od.setting.inits();
+mui.plusReady(function() {
+	od.profile.inits();
+});

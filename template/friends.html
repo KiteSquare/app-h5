@@ -373,12 +373,8 @@
 		</script>-->
 		<script id='msg-template' type="text/template">
 			<% for(var i in record){ var item=record[i]; %>
-			<div class="msg-item <%= (item.flow=='out'?' msg-item-self':'') %>" msg-url=<% if(item.file) {%> "
-				<%=(item.file.url) %>"
-				<% }%> msg-id='
-				<%=(item.idClient)%>' msg-type='
-				<%=(item.type)%>' msg-content='
-				<%=(item.text)%>'>
+			<div class="msg-item <%= (item.flow=='out'?' msg-item-self':'') %>" msg-url=<% if(item.file) {%>"<%=(item.file.url) %>"<% }%> 
+				msg-id="<%=(item.idClient)%>" msg-type="<%=(item.type)%>" msg-content="<%=(item.text)%>">
 				<% if(item.flow=='out' ) { %>
 				<!--<i class="msg-user mui-icon mui-icon-person"></i>-->
 				<img class="msg-self-img msg-img" src="<%=( item.head)%>" alt="" msg-uid="<%=(item.from) %>" />
