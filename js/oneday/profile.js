@@ -49,24 +49,46 @@ od.profile = {
 			
 		});
 	},
+	clipImage: function(filepath) {
+		var pid="cutpicture.html";
+		var cutpicture = plus.webview.getWebviewById(pid);
+		if(!cutpicture) {
+				view = mui.preload({
+//				view = mui.openWindow({
+					url: pid,
+					id: pid, //默认使用当前页面的url作为id
+					styles: {
+						top: '0',
+						bottom: '0'
+					}, //窗口参数
+					extras: {} //自定义扩展参数
+				});
+			}
+		mui.fire(cutpicture,"cutpic",{resImg:filepath});
+		 mui.openWindow({
+		    id:pid,
+		    url:pid
+		  });
+	},
 	getImage: function() {
 		var c = plus.camera.getCamera();
-			c.captureImage(function(e) {
-				plus.io.resolveLocalFileSystemURL(e, function(entry) {
-					var s = entry.toLocalURL() + "?version=" + new Date().getTime();
-					console.log(s);
-					document.getElementById("head-img").src = s;
-					//变更大图预览的src
-					//目前仅有一张图片，暂时如此处理，后续需要通过标准组件实现
-					document.querySelector("#__mui-imageview__group .mui-slider-item img").src = s + "?version=" + new Date().getTime();
-				}, function(e) {
-					console.log("读取拍照文件错误：" + e.message);
-				});
-			}, function(s) {
-				console.log("error" + s);
-			}, {
-				filename: "_doc/head.jpg"
-			})
+		c.captureImage(function(e) {
+			plus.io.resolveLocalFileSystemURL(e, function(entry) {
+				var s = entry.toLocalURL() + "?version=" + new Date().getTime();
+				console.log(s);
+				document.getElementById("head-img").src = s;
+				//变更大图预览的src
+				od.profile.clipImage(s);
+				//目前仅有一张图片，暂时如此处理，后续需要通过标准组件实现
+				document.querySelector("#__mui-imageview__group .mui-slider-item img").src = s + "?version=" + new Date().getTime();
+			}, function(e) {
+				console.log("读取拍照文件错误：" + e.message);
+			});
+		}, function(s) {
+			console.log("error" + s);
+		}, {
+			filename: "_doc/head.jpg"
+		})
 	},
 	galleryImg: function() {
 		plus.gallery.pick(function(a) {
@@ -80,6 +102,7 @@ od.profile = {
 										var e = e.fullPath + "?version=" + new Date().getTime();
 										document.getElementById("head-img").src = e;
 										//变更大图预览的src
+										od.profile.clipImage(e);
 										//目前仅有一张图片，暂时如此处理，后续需要通过标准组件实现
 										document.querySelector("#__mui-imageview__group .mui-slider-item img").src = e + "?version=" + new Date().getTime();;
 									},
@@ -94,6 +117,7 @@ od.profile = {
 							entry.copyTo(root, 'head.jpg', function(e) {
 									var path = e.fullPath + "?version=" + new Date().getTime();
 									document.getElementById("head-img").src = path;
+									od.profile.clipImage(path);
 									//变更大图预览的src
 									//目前仅有一张图片，暂时如此处理，后续需要通过标准组件实现
 									document.querySelector("#__mui-imageview__group .mui-slider-item img").src = path;

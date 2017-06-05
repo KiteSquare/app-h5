@@ -2,6 +2,7 @@ od = window.od || {};
 od.setting = {
 	inits: function() {
 		od.setting.initEvents();
+		od.setting.bindTapEvent()
 	},
 	initEvents: function() {
 		od.setting.bindNameTap();
