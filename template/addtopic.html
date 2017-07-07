@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link href="../css/app.css" rel="stylesheet" />
+		<link href="../css/oneday/addtopic.css" rel="stylesheet" />
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">创建主题</h1>
+			<button class="mui-btn mui-btn-link mui-pull-right" id="create0">创建</button>
+		</header>
+		<div class="mui-content" id="content">
+			<input type="text" placeholder="标题"  id="title"/>
+			
+			<div id="info-detail" class="expandingArea ">
+				<pre><span></span><br></pre>
+				<textarea placeholder="内容" style="border: none;" id="tcontent"></textarea>
+			</div>
+			<div class="img-content">
+				<div id="image-list">
+					<!--<img src="../img/ui.png" class="small-image"/>-->
+				</div>
+				<a id="add-image" class="btn-add-img"><span class="mui-icon mui-icon-plus"></span></a>
+			</div>
+			
+			<button class="mui-btn-block" id="create">创建</button>
+		</div>
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/oneday/base.js"></script>
+		<script src="../js/oneday/addtopic.js"></script>
+	</body>
+
+</html>

@@ -5,7 +5,6 @@ od.search = {
 	},
 	initPage: function() {
 		mui.init();
-		template.config('escape', false);
 	}
 }
 mui.plusReady(function() {

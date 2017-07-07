@@ -102,7 +102,7 @@
 		<script type="text/template" id="recomends-template">
 			<% for(var i in users){ var user=users[i]; %>
 			<li class="mui-table-view-cell mui-media">
-				<a href="detail.html?uid=<%=(user.id)%>">
+				<a href="detail.html?uid=<%=(user.id)%>" data-uid="<%=(user.id)%>">
 					<div class="mui-media-object mui-pull-left">
 						<img class="mui-media-object" src="<%=(user.head)%>">
 					</div>

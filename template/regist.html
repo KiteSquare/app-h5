@@ -1,0 +1,87 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../css/oneday/regist.css" />
+		<link rel="stylesheet" type="text/css" href="../css/mui.picker.min.css" />
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">欢迎</h1>
+		</header>
+		<div class="mui-content">
+			<div class="mui-content-padded" style="" id="step1">
+				<button id="profile">profile</button>
+				<button id="cutpic">cutpic</button>
+				<div class="mui-input-row">
+					<input type="text" id="idcard" class="mui-input-clear" placeholder="身份证号码">
+				</div>
+				
+				<div class="mui-input-row">
+					<button type="button" class="btn-next" onclick="return false;" data-step='2'>下一步</button>
+				</div>
+			</div>
+			<div class="mui-content-padded" id="step2" style="display: none;">
+				<div class="mui-input-row">
+					<input type="text" id="phone" class="mui-input-clear" placeholder="手机号">
+				</div>
+				<div class="mui-input-row">
+					<input type="text" id="code" class="input-code" style="width: 65%;"placeholder="验证码">
+					<button type="button" class="mui-btn btn-send" style="width: 30%;"  onclick="return false;">发送</button>
+				</div>
+				<div class="mui-input-row mui-password">
+					<input type="text" id="password" class="mui-input-password" placeholder="密码 6位以上">
+				</div>
+				<div class="mui-input-row">
+					<button type="button" class="btn-pre" onclick="return false;" data-step='1'>上一步</button>
+					<button type="button" class="btn-next" onclick="return false;" data-step='3'>下一步</button>
+				</div>
+				
+			</div>
+			<ul class="mui-table-view" id="step3" style="display: none;">
+				<li class="mui-table-view-cell">
+					<a id="head" class="mui-navigate-right">头像
+						<span class="mui-pull-right head">
+							<img class="head-img mui-action-preview" id="head-img" src=""/>
+						</span>
+					</a>
+				</li>
+				<li class="mui-table-view-cell ">
+					<div class="mui-input-row">
+						<label>昵称</label>
+						<input type="text" id="name" placeholder="不超过15个字">
+					</div>
+				</li>
+				<li class="mui-table-view-cell">
+					<a id="sex" data-sex="1">性别<span class="mui-pull-right">男</span></a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a id="birth" data-birth="">生日<span class="mui-pull-right">点击设置</span></a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a id="city" data-provinceCode="" data-province="" data-cityCode="" data-city="">城市<span class="mui-pull-right"></span></a>
+					<input type="hidden" id="lat"/>
+					<input type="hidden" id="lon" />
+				</li>
+				<li class="mui-table-view-cell">
+					<button type="button" class="btn-pre" onclick="return false;" data-step='2'>上一步</button>
+					<button type="button" class="btn-next" onclick="return false;" data-step='4'>完成</button>
+				</li>
+			</ul>
+		</div>
+		
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/oneday/base.js"></script>
+		<script src="../js/oneday/regist.js"></script>
+		<script src="../js/mui.picker.min.js"></script>
+		<script src="../js/mui.poppicker.js"></script>
+		<script src="../js/city.data.js" type="text/javascript" charset="utf-8"></script>
+	</body>
+	
+</html>

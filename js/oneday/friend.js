@@ -12,11 +12,15 @@ od.friend = {
 		footer: document.querySelector('footer')
 	},
 	onAcceptedClick: function(e) {
-		var targetUserId = this.getAttribute("msg-id"),
-			userId = plus.storage.getItem("uid");
+		var targetUserId = this.getAttribute("msg-id");
 		var btnArray = ['取消', '确认'];
 		mui.confirm('接受TA的请求将会永远能与TA保持聊天，但是同时会自动拒绝之前已接受的人，因为只能接受一个人哦~~点击确认继续', '确认', btnArray, function(e) {
 			if(e.index == 0) {
+				return;
+			}
+			var token = od.base.getAccessToken();
+			if (od.isNull(token)) {
+				mui.toast("请先登录");
 				return;
 			}
 			mui.ajax(
@@ -25,12 +29,12 @@ od.friend = {
 					dataType: "json",
 					contentType: "application/json",
 					data: JSON.stringify({
-						"userId": userId,
+						"accessToken": token,
 						"targetUserId": targetUserId
 					}),
 					success: od.friend.onAcceptedClickSuccess,
 					error: function(e) {
-						mui.toast('error');
+						od.base.onError("FAILED_NETWORK");
 					},
 					timeout: 10000
 				}
@@ -49,11 +53,15 @@ od.friend = {
 		}
 	},
 	onRejectClick: function(e) {
-		var targetUserId = this.getAttribute("msg-id"),
-			userId = plus.storage.getItem("uid");
+		var targetUserId = this.getAttribute("msg-id");
 		var btnArray = ['取消', '确认'];
 		mui.confirm('拒绝TA的请求将不能再与TA聊天~~点击确认继续', '确认', btnArray, function(e) {
 			if(e.index == 0) {
+				return;
+			}
+			var token = od.base.getAccessToken();
+			if (od.isNull(token)) {
+				mui.toast("请先登录");
 				return;
 			}
 			mui.ajax(
@@ -62,12 +70,12 @@ od.friend = {
 					dataType: "json",
 					contentType: "application/json",
 					data: JSON.stringify({
-						"userId": userId,
+						"accessToken": token,
 						"targetUserId": targetUserId
 					}),
 					success: od.friend.onRejectClickSuccess,
 					error: function(e) {
-						mui.toast('error');
+						od.base.onError("FAILED_NETWORK");
 					},
 					timeout: 10000
 				}
@@ -90,6 +98,25 @@ od.friend = {
 		} else {
 			mui.toast(data.message);
 		}
+//		if(data.code && data.code == "0") {
+//							//			mui.toast('success');
+//				//			plus.webview.currentWebview().reload();
+//							var obj = document.getElementById("user-"+targetUserId);
+//							if (obj) {
+//								var menuObj = obj.getElementsByClassName("mui-pull-right");
+//								if (menuObj) {
+//									menuObj[0].parentNode.removeChild(menuObj[0]);
+//								}
+//								obj.getElementsByClassName("mui-media-footer")[0].insertAdjacentHTML('beforeend',  "<span>已结束</span>");
+//
+//							}
+//							var popoverObj = document.getElementById("opPopover-"+targetUserId);
+//							if (popoverObj) {
+//								popoverObj.style.display="none";
+//							}
+//						} else {
+//							mui.toast(data.message);
+//						}
 	},
 	onUserClick: function(e) {
 		clicked('detail.html', 'zoom-fade-out', true);
@@ -302,23 +329,22 @@ od.friend = {
 	},
 	
 	loadFriends: function() {
-		var uid = plus.storage.getItem("uid");
-		if(uid === undefined) {
-			//			alert("请先登录");
-			closeWaiting();
+		var token = od.base.getAccessToken();
+		if (!token) {
+			mui.toast("你还未登录哦");
 			return;
 		}
-		//		$("#content").html("");
-//		od.friend.ui.friends.innerHTML = '';
+		
 		mui.ajax(
-			od.host + "/oneday/willow/info/" + uid + "?currentPage="+(od.friend.currentPage+1)+"&count=1", 
+			od.host + "/oneday/willow/candidates?currentPage="+(od.friend.currentPage+1)+"&count=1", 
 			{
-				type: "get",
+				type: "post",
 				dataType: "json",
 				success: od.friend.onLoadFriends,
+				contentType:"application/json",
+				data:JSON.stringify({"accessToken":token}),  
 				error: function(e) {
-					console.log(e);
-					alert("error " + e);
+					od.base.onError("FAILED_NETWORK");
 				},
 				timeout: 10000
 			}
@@ -341,7 +367,7 @@ od.friend = {
 		//		window.uid = 7;
 		//		$.cookie('sdktoken',"7",{expires:7,path:'/'});
 		od.friend.cache = new Cache();
-		template.config('escape', false);
+//		template.config('escape', false);
 		//初始化页面
 		od.friend.initPage();
 		//初始化聊天组件
@@ -376,7 +402,37 @@ od.chat = {
 			return;
 		}
 		od.chat.initEvents();
-		od.chat.initSDKBridge();
+		od.chat.initChatSdk();
+	},
+	initChatSdk: function() {
+		if (!od.base.isLogin()) {
+			return;
+		}
+		var token = od.base.getAccessToken();
+		var param = {
+			'accessToken': token
+		};
+		mui.ajax(
+			od.host + "/oneday/user/get", 
+			{
+				type: "post",
+				dataType: "json",
+				contentType:"application/json",
+				data:JSON.stringify(param),
+				success: function(data) {
+					if (data.code && data.code != "0") {
+						mui.toast(data.message);
+						return;
+					}
+					od.chat.initSDKBridge(data.data.id);
+				},
+				error: function(e) {
+					od.base.onError("FAILED_NETWORK");
+				},
+				timeout: 10000
+			}
+		);
+		
 	},
 	initEvents: function() {
 		//		$("#view-chat .chat-send").click(od.chat.onSendClick);
@@ -967,9 +1023,8 @@ od.chat = {
 			od.chat.initLocalMsgsByUser(user.id, 50, timestamp);
 		}
 	},
-	initSDKBridge: function() {
-		var sdktoken = plus.storage.getItem("sdktoken"),
-			userUID = plus.storage.getItem("uid"),
+	initSDKBridge: function(userUID) {
+		var sdktoken = od.base.getSdkToken(),//plus.storage.getItem("sdktoken"),
 			that = this;
 
 		if(!userUID) {
@@ -1496,6 +1551,11 @@ od.chat = {
 	//		}
 	//		od.chat.send(od.chat.currentChatUser, message);
 	//	},
+	
+	/**
+	 * 设置当前聊天对象
+	 * @param {Object} uid
+	 */
 	setCurrentChatUser: function(uid) {
 		od.chat.currentChatUser = uid;
 		od.chat.setCurrentSession(uid);

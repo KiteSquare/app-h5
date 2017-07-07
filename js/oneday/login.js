@@ -2,6 +2,7 @@ od = window.od ||{};
 od.login = od.login || {};
 od.login = {
 	inits: function() {
+		mui.init();
 		od.login.initEvents();
 	},
 	initEvents: function() {
@@ -18,14 +19,14 @@ od.login = {
 		}
 		var url = od.getUrlParam("url")||"";
 		
-		var param = {"phone": name, "password": password, "type": 1, "url": url};
+		od.login.param = {"phone": name, "password": password, "type": 1, "url": url};
 		mui.ajax(
 			od.host + "/oneday/user/login", 
 			{
 				type:"post",	
 				dataType: "json",
 				contentType:"application/json",
-				data:JSON.stringify(param),  
+				data:JSON.stringify(od.login.param),  
 				success: od.login.onLoginSuccess,
 				error: function(e){
 					console.log(e);
@@ -67,24 +68,23 @@ od.login = {
 			return;
 		}
 		var info = data.data;
-		plus.storage.setItem("uid",info.id+"");
-		plus.storage.setItem("head",info.head);
-		plus.storage.setItem("user_sex",info.sex + "");
-		plus.storage.setItem("uidStoreTime",""+Date.parse(new Date()));
-//		$.cookie('uid',info.id,{expires:360,path:'/'});
-		if (info && info.sdktoken) {
-			plus.storage.setItem("sdktoken",info.sdktoken);
-//			$.cookie('sdktoken',info.sdktoken,{expires:360,path:'/'});
-		}
+		
+		od.base.setLocalUser({"name":od.login.param['phone'], "password":od.login.param['password']});
+		od.base.setAccessToken(info['accessToken']);
+		od.base.setSdkToken(info.sdktoken);
 		var main = plus.webview.getWebviewById( plus.runtime.appid );   
         mui.fire(main,'refresh');
 		
-		
 		if (info && info.url) {
-			mui.openWindow({
-				url: info.url, 
-				id: info.url
-			});
+			var page = plus.webview.getWebviewById(info.url);
+			if (page) {
+				page.show();
+			} else {
+				mui.openWindow({
+					url: info.url, 
+					id: info.url
+				});
+			}
 		} else {
 			main.show();
 		}
@@ -92,7 +92,7 @@ od.login = {
 	}
 }
 
-mui.init();
+
 mui.plusReady(function() {
 	od.login.inits();
 })

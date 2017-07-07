@@ -9,7 +9,17 @@ pre {
 	outline: 0;
 	border: 0;
 }
-
+.mui-popup-input input{
+	padding: 10px 5px;
+	height: 40px;
+}
+.mui-popup.mui-popup-in{
+	width: 85%;
+}
+.mui-popup-inner:after{
+	background-color: #555;
+	height: 2px;
+}
 .mui-popup-button {
 	color: #000000;
 }
@@ -85,4 +95,27 @@ pre {
 }
 #head {
     line-height: 40px;
+}
+.mui-table-view-cell-no-click{
+	position: relative;
+    overflow: hidden;
+    padding: 11px 15px;
+    -webkit-touch-callout: none;
+}
+.small-image{
+	bottom: 10px;
+    right: 10px;
+    width: 75px;
+    height: 75px;
+    float: left;
+    margin: 0 20px 20px 0;
+}
+.btn-add-img{
+	float: left;
+    line-height: 80px;
+    height: 80px;
+    margin-left: 10px;
+}
+.btn-add-img .mui-icon {
+	font-size: 40px;
 }

@@ -1,0 +1,164 @@
+.topic-content{
+	padding: 10px;
+	margin: 0;
+	border-radius: 2px;
+    background-color: #fff;
+    background-clip: padding-box;
+    box-shadow: 0 1px 2px rgba(0,0,0,.3);
+}
+.topic-title{
+	font-size: 17px;
+}
+.topic-detail {
+	text-indent: 2em;
+}
+.user-content {
+	position: relative;
+    overflow: hidden;
+    padding: 5px 0;
+    -webkit-touch-callout: none;
+    background-color: #fafafa;
+}
+.user-img {
+	width: 30px;
+	margin-right: 10px;
+}
+.mui-media-body,.mui-media-body p {
+	font-size: 12px;
+	line-height: 15px;
+}
+.reply-content {
+	margin: 20px 0 10px;
+}
+.reply-item {
+	margin-top: 3px;
+	overflow: hidden;
+	position: relative;
+	padding: 10px;
+	border-radius: 2px;
+    background-color: #fff;
+    background-clip: padding-box;
+    box-shadow: 0 1px 2px rgba(0,0,0,.3);
+}
+.reply-text {
+	text-indent: 2em;
+	padding: 5px 0;
+}
+.reply-item .user-content{
+	background-color: transparent;
+}
+.reply-footer {
+	color: #6d6d72;
+	font-size: 12px;
+	position: relative;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    min-height: 20px;
+    padding: 5px 10px;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+    justify-content: space-between;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+}
+.reply-footer:after {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    height: 1px;
+    content: '';
+    -webkit-transform: scaleY(.5);
+    transform: scaleY(.5);
+    background-color: #c8c7cc;
+} 
+.topic-images {
+	margin: 10px 0;
+}
+#btn-comment{
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	z-index: 5;
+	background-color:#555 ;
+	color: #fff;
+	margin-bottom:0;
+}
+.mui-content {
+	padding-bottom: 50px;
+}
+
+footer {
+	position: fixed;
+	width: 100%;
+	height: 50px;
+	min-height: 50px;
+	border-top: solid 1px #bbb;
+	left: 0px;
+	bottom: 0px;
+	overflow: hidden;
+	padding: 0px 50px;
+	background-color: #fafafa;
+	z-index: 9;
+}
+
+.footer-left {
+	position: absolute;
+	width: 50px;
+	height: 50px;
+	left: 0px;
+	bottom: 0px;
+	text-align: center;
+	vertical-align: middle;
+	line-height: 100%;
+	padding: 12px 4px;
+}
+
+.footer-right {
+	position: absolute;
+	width: 50px;
+	height: 50px;
+	right: 0px;
+	bottom: 0px;
+	text-align: center;
+	vertical-align: middle;
+	line-height: 100%;
+	padding: 12px 5px;
+	display: inline-block;
+}
+
+.footer-center {
+	height: 100%;
+	padding: 5px 0px;
+}
+
+.footer-center [class*=input] {
+	width: 100%;
+	height: 100%;
+	border-radius: 5px;
+}
+
+.footer-center .input-text {
+	background: #fff;
+	border: solid 1px #ddd;
+	padding: 10px !important;
+	font-size: 16px !important;
+	line-height: 18px !important;
+	font-family: verdana !important;
+	overflow: hidden;
+}
+
+.footer-center .input-sound {
+	background-color: #eee;
+}
+.footer-right span{
+	position: absolute;
+	right: 0;
+	top: 0;
+	width: 100%;
+	line-height: 50px;
+	color: #fff;
+	background-color: #DA524E;
+}

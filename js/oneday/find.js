@@ -4,26 +4,30 @@ od.find = {
 		od.find.initPage();
 		od.find.bindTapEvents();
 		od.find.bindNextTap();
+		document.addEventListener("refresh",od.find.refresh);
 	},
 	initPage: function() {
 		mui.init();
-		template.config('escape', false);
-		var friendswebview = plus.webview.getWebviewById("friends.html");
-		if (friendswebview) {
-			friendswebview.reload();
-		} else {
-			var view = mui.preload({
-				//					view = mui.openWindow({	
-				url: "friends.html",
-				id: "friends.html", //默认使用当前页面的url作为id
-				styles: {
-					top: '0',
-					bottom: '0'
-				}, //窗口参数
-				extras: {} //自定义扩展参数
-			});
-		}
-		
+//		template.config('escape', false);
+//		var friendswebview = plus.webview.getWebviewById("friends.html");
+//		if (friendswebview) {
+//			friendswebview.reload();
+//		} else {
+//			var view = mui.preload({
+//				//					view = mui.openWindow({	
+//				url: "friends.html",
+//				id: "friends.html", //默认使用当前页面的url作为id
+//				styles: {
+//					top: '0',
+//					bottom: '0'
+//				}, //窗口参数
+//				extras: {} //自定义扩展参数
+//			});
+//		}
+//		
+//		od.find.loadRecomend();
+	},
+	refresh: function() {
 		od.find.loadRecomend();
 	},
 	bindTapEvents: function() {
@@ -62,17 +66,21 @@ od.find = {
 		document.getElementById("app-next").addEventListener("tap", od.find.loadRecomend);
 	},
 	loadRecomend: function() {
-		var uid = plus.storage.getItem("uid");
+		var token = od.base.getAccessToken();
+		if (!token) {
+			mui.toast("你还未登录哦");
+			return;
+		}
 		mui.ajax(
 			od.host + "/oneday/search/recommend", 
 			{
 				type:"post",	
 				dataType: "json",
 				contentType:"application/json",
-				data:JSON.stringify({"id":uid}),  
+				data:JSON.stringify({"accessToken":token}),  
 				success: od.find.onLoadRecomendSuccess,
 				error: function(e){
-					mui.toast("加载推荐失败");
+					od.base.onError("FAILED_NETWORK");
 				},
 			}
 		);

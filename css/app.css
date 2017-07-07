@@ -3,11 +3,11 @@
  * 在实际项目开发时，建议为App单独写一个css文件，从而实现项目的自定义皮肤功能；
  * 
  * */
-a{
-	color: #000000;
+a,.mui-btn-link,.mui-btn{
+	color: #555;
 }
 .mui-bar-tab .mui-tab-item.mui-active {
-				color: #000000;
+	color: #000000;
 }
 
 .app-icon-female{
@@ -20,3 +20,16 @@ a{
 	width: 16px;
     height: 16px;
 }
+.mui-progressbar span{
+	background: #CF2D28;
+}
+body>.mui-progressbar {
+	position: fixed;
+}
+.mui-icon{
+	color: #555;
+}
+.mui-bar .mui-btn-link{
+	color: #555;
+}
+

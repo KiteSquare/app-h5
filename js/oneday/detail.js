@@ -2,6 +2,7 @@ od = window.od || {};
 od.chat = od.chat || {};
 od.detail = {
 	inits: function() {
+		od.detail.uid = od.getUrlParam("uid"),//  plus.webview.currentWebview().tid;
 		od.detail.initPage();
 		od.detail.loadData();
 		od.detail.bindChatTapEvent();
@@ -9,11 +10,15 @@ od.detail = {
 	},
 	initPage: function() {
 		mui.init();
-		template.config('escape', false);
+//		template.config('escape', false);
 	},
 	loadData: function() {
-		var targetUserId = od.getUrlParam("uid"),
-			uid = plus.storage.getItem('uid');
+		var targetUserId = od.detail.uid,
+			token = od.base.getAccessToken();
+//		if (!token) {
+//			mui.toast("你还未登录哦");
+//			return;
+//		}
 		if(targetUserId) {
 			mui.ajax(
 				od.host + "/oneday/willow/relation", {
@@ -21,7 +26,7 @@ od.detail = {
 					dataType: "json",
 					contentType: "application/json",
 					data: JSON.stringify({
-						"userId": uid,
+						"accessToken": token,
 						"targetUserId": targetUserId
 					}),
 					success: od.detail.onloadDataSuccess,
@@ -41,6 +46,11 @@ od.detail = {
 				"relation": data.data.relation,
 				"user": data.data.currentUser
 			});
+			var titleObj = document.querySelector(".mui-title");
+			titleObj.innerHTML = data.data.targetUser["name"];
+			mui("#message-images").slider({
+						interval: 0
+					})
 		} else {
 			mui.toast(data.message);
 		}
@@ -83,9 +93,13 @@ od.detail = {
 		}
 	},
 	onSendTap: function(e) {
-		var receiverId = this.getAttribute('msg-id'),
-			senderId = plus.storage.getItem("uid");
-		if(!receiverId || !senderId) {
+		var receiverId = this.getAttribute('msg-id');
+		if(!receiverId ) {
+			return;
+		}
+		var token = od.base.getAccessToken();
+		if (!token) {
+			mui.toast("你还未登录哦");
 			return;
 		}
 		mui.ajax(
@@ -94,7 +108,7 @@ od.detail = {
 				dataType: "json",
 				contentType: "application/json",
 				data: JSON.stringify({
-					"senderId": senderId,
+					"accessToken": token,
 					"receiverId": receiverId
 				}),
 				success: od.detail.onSendTapSuccess,
@@ -109,7 +123,7 @@ od.detail = {
 	onSendTapSuccess: function(data) {
 		if(data.code && data.code == "0") {
 			var obj = document.querySelector(".mui-content-padded");
-			obj.innerHTML='<button class="mui-btn mui-btn-success mui-btn-block btn-chat" msg-id="'+od.getUrlParam("uid")+'">聊天</button>';
+			obj.innerHTML='<button class="mui-btn mui-btn-success mui-btn-block btn-chat" msg-id="'+od.detail.uid+'">聊天</button>';
 		} else {
 			mui.toast(data.message);
 		}

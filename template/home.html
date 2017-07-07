@@ -6,6 +6,7 @@
 		<title></title>
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link href="../css/app.css" rel="stylesheet" />
 		<link href="../css/oneday/home.css" rel="stylesheet" />
 	</head>
 
@@ -13,8 +14,8 @@
 		<!--下拉刷新容器-->
 		<div id="pullrefresh" class="mui-content mui-scroll-wrapper">
 			<div class="mui-scroll">
-				<div class="od-home-list">
-					<div class="mui-card" >
+				<div class="od-home-list" id="content">
+					<!--<div class="mui-card" >
 						<div class="mui-card-header mui-card-media">
 							<img src="../img/ui.png">
 							<div class="mui-media-body">
@@ -34,46 +35,29 @@
 							</button>
 						</div>
 					</div>
-					
 					<div class="mui-card" >
 						<div class="mui-card-header mui-card-media">
 							<img src="../img/ui.png">
 							<div class="mui-media-body">
 								小M
-								<p>1</p>
+								<p>发表自 Abel</p>
 							</div>
 						</div>
 						<div class="mui-card-content">
-							<div class="mui-card-content-inner">
-								<p>成都市公安局交通管理局第三分局通报还表示，目前事故具体情况正在调查中。通报还发出提醒：“雨天路滑，谨慎驾驶。”</p>
+							<div class="topic-text">
+								成都市公安局交通管理局第三分局通报还表示，目前事故具体情况正在调查中。通报还发出提醒：“雨天路滑，谨慎驾驶。”
 							</div>
+						</div>
+						<div class="mui-card-content">
+							<img src="../img/yuantiao.jpg" width="100%"/>
 						</div>
 						<div class="mui-card-footer">
 							<span></span>
 							<span>15:30</span>
 							<span>500m</span>
 						</div>
-					</div>
-					<div class="mui-card" >
-						<div class="mui-card-header mui-card-media">
-							<img src="../img/ui.png">
-							<div class="mui-media-body">
-								小M
-								<p>发表于 2016-06-30 15:30</p>
-							</div>
-						</div>
-						<div class="mui-card-content">
-							<img src="../img/yuantiao.jpg" width="100%"/>
-						</div>
-						
-						<div class="mui-card-footer">
-							<span>500m</span>
-							<span>15:30</span>
-							<button type="button" class="mui-btn mui-btn-danger">
-								请求
-							</button>
-						</div>
-					</div>
+					</div>-->
+					
 				</div>
 
 				<!--数据列表-->
@@ -82,9 +66,41 @@
 				</ul>
 			</div>
 		</div>
+		<div class="tool-box">
+			<a id="add-topic" class="btn-add-img"><span class="mui-icon mui-icon-compose"></span></a>
+		</div>
 		<script src="../js/mui.min.js"></script>
 		<script src="../js/oneday/base.js"></script>
 		<script src="../js/oneday/home.js"></script>
+		<script src="../js/arttmpl.js"></script>
+		<script type="text/template" id="content-template">
+			<% for(var i in data){ var topic=data[i]; %>
+				<div class="mui-card" data-tid="<%=(topic.id || "")%>">
+						<div class="mui-card-header mui-card-media">
+							<img src="<%=(topic.head || "")%>">
+							<div class="mui-media-body">
+								<%=(topic.title || "")%>
+								<p>发表自 <%=(topic.uname || "")%></p>
+							</div>
+						</div>
+						<div class="mui-card-content">
+							<div class="topic-text">
+								<%-(topic.content || "")%>
+							</div>
+						</div>
+						<%if(topic.imagesList && topic.imagesList.length>0){ var img=topic.imagesList[0];%>
+							<div class="mui-card-content">
+								<img src="<%=(img)%>" width="100%"/>
+							</div>
+						<%}%>
+						<div class="mui-card-footer">
+							<span><%=(topic.count || "0")%>回复</span>
+							<span><%=(topic.time || "")%></span>
+							<span><%=(topic.distance || "")%></span>
+						</div>
+					</div>
+			<%}%>
+		</script>
 	</body>
 
 </html>

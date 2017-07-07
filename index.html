@@ -74,10 +74,56 @@
 		    window.addEventListener('refresh',function(event){   //监听自定义事件
 		        var chidrens = self.children(),i=0;
 		        for(;i<chidrens.length;i++){
-		        	chidrens[i].reload(true);
+		        	mui.fire(chidrens[i],"refresh");
 		        }
 		    });
-			
+		    
+		    
+		    
+		    
+		    
+		    
+		    function geocode() {
+			plus.geolocation.getCurrentPosition( function ( p ) {
+						console.log(p);
+//						alert( "Geolocation\nLatitude:" + p.coords.latitude + "\nLongitude:" + p.coords.longitude + "\nAltitude:" + p.coords.altitude );
+						
+						plus.storage.setItem("lat",""+p.coords.latitude);
+						plus.storage.setItem("lon",""+p.coords.longitude);
+						if (p.address && p.address.city) {
+							var i=0,j=0,tt,provinceCode,cityCode;
+							for(;i<cityData.length;i++) {
+								tt=cityData[i];
+								if (tt.text == p.address.province) {
+									provinceCode=tt.value;
+									for(;j<tt.children.length;j++){
+										if (tt.children[j].text==p.address.city){
+											cityCode=tt.children[j].value;
+											break;
+										}
+									}
+									break;
+								}
+								
+							}
+							plus.storage.setItem("city",p.address.city);
+							plus.storage.setItem("province",p.address.province);
+							plus.storage.setItem("cityCode",cityCode);
+							plus.storage.setItem("provinceCode",provinceCode);
+						}
+						
+					}, function ( e ) {
+		//				alert( "Geolocation error: " + e.message );
+						mui.confirm("无法获取定位，请打开gps后重试","定位失败",["确定"]);
+					},
+					{
+		//				provider:'baidu'
+					}
+				);
+		
+			}
+			geocode();
+		    
 		});
  		//当前激活选项
 		var activeTab = subpages[0];
@@ -100,6 +146,7 @@
 				mui.extend(aniShow,temp);
 				plus.webview.show(targetTab,"fade-in",300);
 			}
+			mui.fire(plus.webview.getWebviewById(targetTab),"refresh",{});
 			//隐藏当前;
 			plus.webview.hide(activeTab);
 			//更改当前活跃的选项卡
@@ -121,4 +168,5 @@
 		
 		
 	</script>
+	<script src="js/city.data.js"></script>
 </html>

@@ -1,67 +1,15 @@
-textarea,
-pre {
-	margin: 0;
-	padding: 0;
-	outline: 0;
-	border: 0;
+.mui-page .mui-table-view:first-child {
+    margin-top: 15px;
 }
-.mui-popup-button{
-	color: #000000;
+.mui-table-view {
+    margin-top: 20px;
 }
-.mui-dtpicker  .mui-btn-blue{
-	background-color: #030303;
-	border-color:  #030303;
+.regist-link {
+	padding: 6px 5px;
+    display: inline-block;
+    text-decoration: underline;
 }
-.mui-poppicker  .mui-btn-blue{
-	background-color: #030303;
-	border-color:  #030303;
-}
-
-.expandingArea {
-	position: relative;
-	background: #fff;
-}
-
-.expandingArea textarea,
-.expandingArea pre {
-	padding: 5px;
-	background: transparent;
-	/* Make the text soft-wrap */
-	white-space: pre-wrap;
-	word-wrap: break-word;
-}
-
-.expandingArea textarea {
-	/* The border-box box model is used to allow
-       * padding whilst still keeping the overall width
-       * at exactly that of the containing element.
-       */
-	-webkit-box-sizing: border-box;
-	-moz-box-sizing: border-box;
-	-ms-box-sizing: border-box;
-	box-sizing: border-box;
-	width: 100%;
-	/* This height is used when JS is disabled */
-	height: 100px;
-}
-
-.expandingArea.active textarea {
-	/* Hide any scrollbars */
-	overflow: hidden;
-	position: absolute;
-	top: 0;
-	left: 0;
-	height: 100%;
-	/* Remove WebKit user-resize widget */
-	resize: none;
-}
-
-.expandingArea pre {
-	display: none;
-}
-
-.expandingArea.active pre {
-	display: block;
-	/* Hide the text; just using it for sizing */
-	visibility: hidden;
+.login-link {
+	width: 80px;
+	margin-right: 5px;
 }

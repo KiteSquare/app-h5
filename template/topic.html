@@ -1,0 +1,139 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link href="../css/app.css" rel="stylesheet" />
+		<link href="../css/oneday/topic.css" rel="stylesheet" />
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">主题</h1>
+		</header>
+		<div class="mui-content mui-scroll-wrapper" id="content">
+			<div class="mui-scroll">
+				<div class="topic-content" id="topic">
+					<!--<div class="user-content">
+						<img src="../img/ui.png" class="mui-pull-left user-img"/>
+						<div class="mui-media-body">
+							昵称
+							<p class='mui-ellipsis'>15小时前</p>
+						</div>
+					</div>
+					<h1 class="topic-title">我是标题</h1>
+					<div class="topic-detail">
+						的接口的就是看大家看似简单,记得记得,对对对<br />dd
+					</div>
+					<div class="topic-images">
+						<img src="../img/yuantiao.jpg" width="100%"/>
+						<img src="../img/yuantiao.jpg" width="100%"/>
+						<img src="../img/yuantiao.jpg" width="100%"/>
+					</div>-->
+				</div>
+				<div class="reply-content" id="reply">
+					
+					
+					<!--<div class="reply-item">
+						<div class="user-content">
+							<img src="../img/ui.png" class="mui-pull-left user-img"/>
+							<div class="mui-media-body">
+								昵称
+								<p class='mui-ellipsis'>15小时前</p>
+							</div>
+						</div>
+						<div class="reply-text">
+							的接口的就是看大家看似简单,记得记得,对对对<br />dd
+						</div>
+						<div class="reply-footer">
+							<span>2楼</span>
+							
+							<a href="#" class="">回复(10)</a>
+							<span>...</span>
+						</div>
+					</div>-->
+				</div>
+			
+			</div>
+		</div>
+		
+		<div class="comment-content" id="comment-text">
+			
+		</div>
+		<footer class="">
+				<div class="footer-left">
+					<i class="mui-icon mui-icon-camera msg-image"></i>
+				</div>
+				<div class="footer-center">
+					<textarea type="text" class='input-text msg-text' id="text-reply"></textarea>
+				</div>
+				<div class="footer-right">
+					<span id="btn-reply">发表</span>
+				</div>
+		</footer>
+		
+		
+		<!--<button class="mui-btn-block" id="btn-comment">写评论</button>-->
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/oneday/base.js"></script>
+		<script src="../js/oneday/topic.js"></script>
+		<script src="../js/arttmpl.js"></script>
+		<script type="text/template" id="replies-template">
+			<% for(var i in data){ var reply=data[i]; %>
+				<div class="reply-item">
+					<div class="user-content">
+						<a href="detail.html?uid=<%=(reply.uid)%>" data-uid="<%=(reply.uid)%>">
+							<img src="<%=(reply.head)%>" class="mui-pull-left user-img"/>
+						</a>
+						<div class="mui-media-body">
+							<%=(reply.uname || "")%>
+							<p class='mui-ellipsis'><%=(reply.time || "")%></p>
+						</div>
+					</div>
+					<div class="reply-text">
+						<%-(reply.content || "")%>
+					</div>
+					<div class="reply-footer">
+						<span><%=(reply.floor || "-")%>楼</span>
+						<span><%=(reply.distance || "")%></span>
+						<!--<a href="#" class="">回复(10)</a>-->
+						<span>...</span>
+					</div>
+				</div>
+			<%}%>	
+		</script>
+		<script type="text/template" id="topic-template">
+			<% if (topic) {%>
+				<div class="user-content">
+					<a href="detail.html?uid=<%=(topic.uid)%>" data-uid="<%=(topic.uid)%>">
+						<img src="<%=(topic.head || "")%>" class="mui-pull-left user-img"/>
+					</a>
+					
+					<div class="mui-media-body">
+						<%=(topic.uname || "")%>
+						<p class='mui-ellipsis'><%=(topic.time || "")%></p>
+					</div>
+				</div>
+				<h1 class="topic-title"><%=(topic.title || "")%></h1>
+				<div class="topic-detail">
+					<%-(topic.content)%>
+				</div>
+				<%if (topic.imagesList){%>
+					<div class="topic-images">
+						<% for(var i in topic.imagesList){ var img=topic.imagesList[i]; %>
+							<img src="<%=(img)%>" width="100%"/>
+						<%}%>	
+					</div>
+				<%}%>
+			<%} else {%>
+				找不到主题
+			<%}%>
+			
+		</script>
+	</body>
+
+</html>

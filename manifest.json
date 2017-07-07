@@ -56,9 +56,7 @@
          "Invocation": {
             "description": "使用Native.js能力"
         },
-        "Messaging": {
-            "description": "访问通讯能力"
-        },
+        
         "Orientation": {
             "description": "访问方向感应器"
         },
@@ -87,9 +85,7 @@
         "Maps": {
             "description": "管理地图插件"
         },
-        "Speech": {
-            "description": "管理语音识别插件"
-        },
+        "Speech": {},
         "Webview":{
         	"description": "窗口管理"
         },
@@ -101,7 +97,7 @@
         },
         "NativeObj":{
         	"description": "原生对象"
-        },"Share":{}
+        }
 	},
 	"plus": {
 		"splashscreen": {
@@ -132,34 +128,34 @@
 					"prerendered": true, /*应用图标是否已经高亮处理，在iOS6及以下设备上有效*/
 					"auto": "", /*应用图标，分辨率：512x512，用于自动生成各种尺寸程序图标*/
 					"iphone": {
-						"normal": "",/*iPhone普通屏幕程序图标，分辨率：57x57*/
-						"retina": "",/*iPhone高分屏程序图标，分辨率：114x114*/
-						"retina7": "",/*iPhone iOS7高分屏程序图标，分辨率：120x120*/
-						"spotlight-normal": "", /*iPhone Spotlight搜索程序图标，分辨率：29x29*/
-						"spotlight-retina": "", /*iPhone高分屏Spotlight搜索程序图标，分辨率：58x58*/
-						"spotlight-retina7": "",/*iPhone iOS7高分屏Spotlight搜索程序图标，分辨率：80x80*/
-						"settings-normal": "", /*iPhone设置页面程序图标，分辨率：29x29*/
-						"settings-retina": ""
+						"normal": "unpackage/res/icons/57x57.png",/*iPhone普通屏幕程序图标，分辨率：57x57*/
+						"retina": "unpackage/res/icons/114x114.png",/*iPhone高分屏程序图标，分辨率：114x114*/
+						"retina7": "unpackage/res/icons/120x120.png",/*iPhone iOS7高分屏程序图标，分辨率：120x120*/
+						"spotlight-normal": "unpackage/res/icons/29x29.png", /*iPhone Spotlight搜索程序图标，分辨率：29x29*/
+						"spotlight-retina": "unpackage/res/icons/58x58.png", /*iPhone高分屏Spotlight搜索程序图标，分辨率：58x58*/
+						"spotlight-retina7": "unpackage/res/icons/80x80.png",/*iPhone iOS7高分屏Spotlight搜索程序图标，分辨率：80x80*/
+						"settings-normal": "unpackage/res/icons/29x29.png", /*iPhone设置页面程序图标，分辨率：29x29*/
+						"settings-retina": "unpackage/res/icons/58x58.png","retina8":"unpackage/res/icons/180x180.png","settings-retina8":"unpackage/res/icons/87x87.png"
 					},
 					"ipad": {
-						"normal": "", /*iPad普通屏幕程序图标，分辨率：72x72*/
-						"retina": "", /*iPad高分屏程序图标，分辨率：144x144*/
-						"normal7": "", /*iPad iOS7程序图标，分辨率：76x76*/
-						"retina7": "", /*iPad iOS7高分屏程序图标，分辨率：152x152*/
-						"spotlight-normal": "", /*iPad Spotlight搜索程序图标，分辨率：50x50*/
-						"spotlight-retina": "", /*iPad高分屏Spotlight搜索程序图标，分辨率：100x100*/
-						"spotlight-normal7": "",/*iPad iOS7 Spotlight搜索程序图标，分辨率：40x40*/
-						"spotlight-retina7": "",/*iPad iOS7高分屏Spotlight搜索程序图标，分辨率：80x80*/
-						"settings-normal": "",/*iPad设置页面程序图标，分辨率：29x29*/
-						"settings-retina": ""
+						"normal": "unpackage/res/icons/72x72.png", /*iPad普通屏幕程序图标，分辨率：72x72*/
+						"retina": "unpackage/res/icons/144x144.png", /*iPad高分屏程序图标，分辨率：144x144*/
+						"normal7": "unpackage/res/icons/76x76.png", /*iPad iOS7程序图标，分辨率：76x76*/
+						"retina7": "unpackage/res/icons/152x152.png", /*iPad iOS7高分屏程序图标，分辨率：152x152*/
+						"spotlight-normal": "unpackage/res/icons/50x50.png", /*iPad Spotlight搜索程序图标，分辨率：50x50*/
+						"spotlight-retina": "unpackage/res/icons/100x100.png", /*iPad高分屏Spotlight搜索程序图标，分辨率：100x100*/
+						"spotlight-normal7": "unpackage/res/icons/40x40.png",/*iPad iOS7 Spotlight搜索程序图标，分辨率：40x40*/
+						"spotlight-retina7": "unpackage/res/icons/80x80.png",/*iPad iOS7高分屏Spotlight搜索程序图标，分辨率：80x80*/
+						"settings-normal": "unpackage/res/icons/29x29.png",/*iPad设置页面程序图标，分辨率：29x29*/
+						"settings-retina": "unpackage/res/icons/58x58.png"
 					}
 				},
 				"android": {
-					"mdpi": "", /*普通屏程序图标，分辨率：48x48*/
-					"ldpi": "", /*大屏程序图标，分辨率：48x48*/
-					"hdpi": "", /*高分屏程序图标，分辨率：72x72*/
-					"xhdpi": "",/*720P高分屏程序图标，分辨率：96x96*/
-					"xxhdpi": ""
+					"mdpi": "unpackage/res/icons/48x48.png", /*普通屏程序图标，分辨率：48x48*/
+					"ldpi": "unpackage/res/icons/48x48.png", /*大屏程序图标，分辨率：48x48*/
+					"hdpi": "unpackage/res/icons/72x72.png", /*高分屏程序图标，分辨率：72x72*/
+					"xhdpi": "unpackage/res/icons/96x96.png",/*720P高分屏程序图标，分辨率：96x96*/
+					"xxhdpi": "unpackage/res/icons/144x144.png","xxxhdpi":"unpackage/res/icons/192x192.png"
 				}
 			},
 			"splashscreen": {
@@ -183,9 +179,9 @@
 				"android": {
 					"mdpi": "img/splash.png", /*普通屏启动图片，分辨率：240x282*/
 					"ldpi": "img/splash.png", /*大屏启动图片，分辨率：320x442*/
-					"hdpi": "img/splash.png", /*高分屏启动图片，分辨率：480x762*/
-					"xhdpi": "img/splash.png", /*720P高分屏启动图片，分辨率：720x1242*/
-					"xxhdpi": "img/splash.png"
+					"hdpi": "img/splash480X800.png", /*高分屏启动图片，分辨率：480x762*/
+					"xhdpi": "img/splash7200X1280.png", /*720P高分屏启动图片，分辨率：720x1242*/
+					"xxhdpi": "img/splash1080X1920.png"
 				}
 			}
 		}
@@ -198,7 +194,8 @@
 					"fonts/mui.ttf",
 					"css/mui.min.css",
 					"template/home.html",
-					"css/app.css"
+					"css/app.css",
+					"js/city.data.js"
 				],
 				"refer": [
 					"template/login.html",
@@ -218,9 +215,14 @@
 					"js/oneday/base.js",
 					"js/mui.min.js",
 					"css/mui.min.css",
-					"fonts/mui.ttf"
+					"fonts/mui.ttf",
+					"js/arttmpl.js",
+					"css/app.css"
 				],
-				"refer": [],
+				"refer": [
+					"template/addtopic.html",
+					"template/topic.html"
+				],
 				"priority": 0
 			},
 			"template/chat.html": {
@@ -264,10 +266,24 @@
 			"template/setting.html": {
 				"resources": [
 					"js/mui.view.js",
-					"fonts/mui.ttf"
+					"fonts/mui.ttf",
+					"js/oneday/setting.js",
+					"css/oneday/setting.css",
+					"js/mui.picker.min.js",
+					"css/mui.picker.min.css",
+					"js/mui.picker.js",
+					"js/mui.min.js",
+					"js/mui.poppicker.js",
+					"css/mui.min.css",
+					"img/ui.png",
+					"js/city.data.js",
+					"template/login.html",
+					"css/app.css",
+					"js/oneday/base.js"
 				],
 				"refer": [
-					"template/login.html"
+					"template/regist.html",
+					"template/profile.html"
 				],
 				"priority": 0
 			},
@@ -277,7 +293,9 @@
 					"fonts/mui.ttf",
 					"css/mui.min.css",
 					"js/oneday/login.js",
-					"js/oneday/base.js"
+					"js/oneday/base.js",
+					"js/trd/aes.min.js",
+					"js/trd/aes.js"
 				],
 				"refer": [
 					"index.html"
@@ -295,10 +313,11 @@
 					"css/mui.min.css",
 					"js/mui.min.js",
 					"fonts/mui.ttf",
-					"js/oneday/base.js"
+					"js/oneday/base.js",
+					"img/man.png",
+					"template/friends.html"
 				],
 				"refer": [
-					"template/friends.html",
 					"template/detail.html",
 					"template/search.html"
 				],
@@ -329,13 +348,102 @@
 				],
 				"refer": [],
 				"priority": 0
+			},
+			"template/regist.html": {
+				"resources": [
+					"js/oneday/regist.js",
+					"css/oneday/regist.css",
+					"template/profile.html",
+					"fonts/mui.ttf",
+					"js/mui.picker.min.js",
+					"js/mui.min.js",
+					"js/oneday/base.js",
+					"css/mui.min.css",
+					"css/mui.picker.min.css",
+					"js/mui.poppicker.js",
+					"js/city.data.js"
+				],
+				"refer": [
+					"template/cutpicture.html"
+				],
+				"priority": 0
+			},
+			"template/profile.html": {
+				"resources": [
+					"js/oneday/profile.js",
+					"css/oneday/profile.css",
+					"template/regist.html",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"js/oneday/base.js",
+					"css/mui.min.css",
+					"css/mui.picker.min.css",
+					"js/arttmpl.js",
+					"js/mui.picker.min.js",
+					"js/mui.poppicker.js",
+					"js/city.data.js",
+					"js/mui.imageViewer.js",
+					"css/app.css",
+					"css/mui.imageviewer.css",
+					"img/ui.png"
+				],
+				"refer": [
+					"template/cutpicture.html"
+				],
+				"priority": 0
+			},
+			"template/cutpicture.html": {
+				"resources": [
+					"js/trd/cropper.min.js",
+					"css/trd/cropper.min.css",
+					"css/mui.css",
+					"js/mui.min.js",
+					"img/yuantiao.jpg",
+					"fonts/mui.ttf",
+					"css/mui.min.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"template/addtopic.html": {
+				"resources": [
+					"css/oneday/addtopic.css",
+					"js/oneday/addtopic.js",
+					"js/mui.min.js",
+					"css/app.css",
+					"fonts/mui.ttf",
+					"js/oneday/base.js",
+					"css/mui.min.css",
+					"img/ui.png"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"template/topic.html": {
+				"resources": [
+					"js/oneday/topic.js",
+					"css/oneday/topic.css",
+					"js/mui.min.js",
+					"css/app.css",
+					"fonts/mui.ttf",
+					"js/oneday/base.js",
+					"css/mui.min.css",
+					"js/arttmpl.js"
+				],
+				"refer": [
+					"template/detail.html"
+				],
+				"priority": 0
 			}
 		},
 		"idle": {
 			"resources": [
-				"js/mui.js",
-				"css/mui.css"
+				"js/mui.js"
 			]
 		}
-	}
+	},
+	"unpackage":[
+	  "css/mui.css",
+	  "js/mui.js"
+	]
 }

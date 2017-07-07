@@ -13,7 +13,7 @@
 	<body>
 		<header class="mui-bar mui-bar-nav">
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-			<h1 class="mui-title">用户</h1>
+			<h1 class="mui-title">用户A</h1>
 		</header>
 		<div class="mui-content" >
 			<!--<ul class="mui-table-view mui-table-view-chevron">
@@ -26,53 +26,129 @@
 					</div>
 				</li>
 			</ul>
+			
+			<ul class="mui-table-view mui-table-view-chevron">
+				
+				<li class="message-cell">
+					<div class="message-top">世界达到</div>
+					<div class="message-top"><span>狮子座</span><span>25岁</span><span>男</span></div>
+				</li>
+			</ul>
+			
 			<ul class="mui-table-view">
+				<div class="message-tip">个人简介</div>
 				<li class="mui-table-view-cell mui-media user-content">
 					<p>的假的撒娇的刷卡惊呆了撒娇带宽数据库，大胜靠德扩山</p>
-					<img class="" src="../img/yuantiao.jpg"/>
+					
+				</li>
+				<div class="mui-slider" id="message-images">
+						<div class="mui-slider-group mui-slider-loop">
+							<div class="mui-slider-item mui-slider-item-duplicate">
+								<img src="../img/ui.png">
+							</div>
+							<div class="mui-slider-item">
+								<img src="../img/yuantiao.jpg">
+							</div>
+							<div class="mui-slider-item">
+								<img src="../img/ui.png">
+							</div>
+							<div class="mui-slider-item mui-slider-item-duplicate">
+								<img src="../img/yuantiao.jpg">
+							</div>
+						</div>
+						<div class="mui-slider-indicator">
+							<div class="mui-indicator mui-active"></div>
+							<div class="mui-indicator"></div>
+						</div>
+				</div>
+			</ul>
+			
+			<ul class="mui-table-view">
+				<div class="message-tip">相亲要求</div>
+				<li class="mui-table-view-cell mui-media user-content">
 					<p>的假的撒娇的刷卡惊呆了撒娇带宽数据库，大胜靠德扩山</p>
-					<img class="" src="../img/yuantiao.jpg"/>
 				</li>
 			</ul>	
 			<div class="mui-content-padded">
-				<button class="mui-btn mui-btn-success mui-btn-block">聊天</button>
-			</div>-->
-			
+				<button class="mui-btn mui-btn-block">聊天</button>
+			</div>
+			-->
 		</div>
+		
 		<script id='content-template' type="text/template">
 			<ul class="mui-table-view mui-table-view-chevron">
-				<li class="mui-table-view-cell mui-media">
-					<img class="mui-media-object mui-pull-left head-img" src="<%=(targetUser.head)%>" />
-					<div class="mui-media-body">
-						<h4><%=(targetUser.name)%> </h4>
-						<p style="overflow: hidden;">
-							<%=(targetUser.age)%>岁
-							<% if(targetUser.height) { %>|<%=(targetUser.height)%>cm<% } %>	
-							<% if(targetUser.education) { %>|<%=(targetUser.education)%><% } %>	
-							<% if(targetUser.marriage) { %>|<%=(targetUser.marriage)%><% } %>	
-						</p>
-						<p><%=(targetUser.signature)%></p>
-					</div>
+				
+				<li class="message-cell">
+					<% if(targetUser.signature){%>
+						<div class="message-top"><%=(targetUser.signature)%></div>
+					<%}%>
+					
+					<div class="message-top"><span><%=(targetUser.constellation)%></span><span><%=(targetUser.ageDisplay)%></span><span><%=(targetUser.sexDisplay)%></span></div>
 				</li>
 			</ul>
+			
 			<ul class="mui-table-view">
+				<div class="message-tip">个人简介</div>
 				<li class="mui-table-view-cell mui-media user-content">
-					<%=(targetUser.detail)%>
+					<p><%=(targetUser.detail)%></p>
 				</li>
-			</ul>	
+				
+				<%  if(targetUser.images && targetUser.images.length>0){var length=targetUser.images.length; %>
+					<div class="mui-slider" id="message-images">
+						<div class="mui-slider-group mui-slider-loop">
+							<!-- 额外增加的一个节点(循环轮播：第一个节点是最后一张轮播) -->
+							<div class="mui-slider-item mui-slider-item-duplicate">
+								<img src="<%=(targetUser.images[length-1])%>">
+							</div>
+							
+							<% for(var i in targetUser.images){ var img=targetUser.images[i]; %>
+								<div class="mui-slider-item">
+									<img src="<%=(img)%>">
+								</div>
+							<%}%>
+							
+							<!-- 额外增加的一个节点(循环轮播：最后一个节点是第一张轮播) -->
+							<div class="mui-slider-item mui-slider-item-duplicate">
+								<img src="<%=(targetUser.images[0])%>">
+							</div>
+						</div>
+						<div class="mui-slider-indicator">
+							
+							<% for(var i=0 ;i <length;i++){ %>
+								<%if (i==0){%>
+									<div class="mui-indicator mui-active"></div>
+								<%}else{%>
+									<div class="mui-indicator"></div>
+								<%}%>
+							<%}%>
+						</div>
+					</div>
+				
+				<%}%>
+				
+				
+			</ul>
+			<% if(targetUser.requirement){%>
+				<ul class="mui-table-view">
+					<div class="message-tip">相亲要求</div>
+					<li class="mui-table-view-cell mui-media user-content">
+						<p><%=(targetUser.requirement)%></p>
+					</li>
+				</ul>
+			<%}%>
 			
 			<div class="mui-content-padded">
 				<% if(relation) { %> 
 					<% if (relation.status>=1 && relation.status<=4) {%>
-						<button class="mui-btn mui-btn-success mui-btn-block btn-chat" msg-id="<%=(targetUser.id)%>">聊天</button>
+						<button class="mui-btn mui-btn-block btn-chat" msg-id="<%=(targetUser.id)%>">聊天</button>
 					<% } else if (relation.status<1) {%>	
 						<% if (targetUser.sex==1) {%>
-							<button class="mui-btn mui-btn-success mui-btn-block btn-send" msg-id="<%=(targetUser.id)%>">发送</button>
+							<button class="mui-btn mui-btn-block btn-send" msg-id="<%=(targetUser.id)%>">发送</button>
 						<% }%>	
 					<% }  %>
 				<% }  else {%>	
 					<% if (targetUser.sex==1) {%>
-							<button class="mui-btn mui-btn-success mui-btn-block btn-send" msg-id="<%=(targetUser.id)%>">发送</button>
+							<button class="mui-btn mui-btn-block btn-send" msg-id="<%=(targetUser.id)%>">发送</button>
 					<% }%>	
 				<% }  %>	
 			</div>

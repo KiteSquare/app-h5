@@ -1,0 +1,94 @@
+.btn-next {
+	display: block;
+	min-width: 120px;
+	background-color: #555555;
+	color: #FFF;
+	float: right;
+	padding: 10px 15px;
+}
+.btn-pre {
+	display: block;
+	min-width: 120px;
+	background-color: #555555;
+	color: #FFF;
+	float: left;
+	padding: 10px 15px;
+}
+.input-code {
+	width: 55%;
+	float: left;
+}
+
+#head-img {
+    position: absolute;
+    bottom: 10px;
+    right: 40px;
+    width: 40px;
+    height: 40px;
+}
+#head {
+    line-height: 40px;
+}
+.btn-send {
+	top: 42%;
+}
+.mui-input-row label{
+	padding: 11px 0;
+}
+.mui-input-row input {
+	height: 45px;
+}
+.mui-table-view-cell>.mui-btn {
+	background-color: #555555;
+	color: #FFF;
+}
+.bounceInRight {
+	animation: bounceInRight 0.5s 1 cubic-bezier(0.215, 0.610, 0.355, 1.000);
+}
+.bounceInLeft {
+	animation: bounceInLeft 0.5s 1 cubic-bezier(0.215, 0.610, 0.355, 1.000);
+}
+@keyframes bounceInLeft {
+  0% {
+    opacity: 0;
+    transform: translate3d(-3000px, 0, 0);
+  }
+  20% {
+    opacity: 0.8;
+  }
+  60% {
+    opacity: 1;
+    transform: translate3d(25px, 0, 0);
+  }
+  75% {
+    transform: translate3d(-10px, 0, 0);
+  }
+  90% {
+    transform: translate3d(5px, 0, 0);
+  }
+  100% {
+    transform: none;
+  }
+}
+@keyframes bounceInRight {
+  0% {
+    opacity: 0;
+    transform: translate3d(3000px, 0, 0);
+  }
+  20% {
+    opacity: 0.8;
+  }
+  60% {
+    opacity: 1;
+    transform: translate3d(-25px, 0, 0);
+  }
+  75% {
+    transform: translate3d(10px, 0, 0);
+  }
+  90% {
+    transform: translate3d(-5px, 0, 0);
+  }
+  100% {
+    transform: none;
+  }
+}
