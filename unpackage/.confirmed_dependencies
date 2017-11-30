@@ -1,131 +1,132 @@
 {
-  "index.html": {
-    "resources": [
-      "js/mui.min.js",
-      "fonts/mui.ttf",
-      "css/mui.min.css",
-      "template/home.html",
-      "css/app.css"
-    ],
-    "refer": [
-      "template/home.html",
-      "template/login.html",
-      "template/chat.html",
-      "template/friends.html",
-      "template/setting.html",
-      "template/find.html"
-    ]
-  },
-  "template/home.html": {
-    "resources": [
-      "js/oneday/home.js",
-      "css/oneday/home.css",
-      "img/yuantiao.jpg",
-      "img/ui.png",
-      "js/oneday/base.js",
-      "js/mui.min.js",
-      "css/mui.min.css",
-      "fonts/mui.ttf"
-    ],
-    "refer": []
-  },
-  "template/chat.html": {
-    "resources": [
-      "js/mui.imageViewer.js",
-      "css/app.css",
-      "css/mui.imageviewer.css",
-      "js/arttmpl.js",
-      "js/mui.min.js",
-      "fonts/mui.ttf",
-      "css/mui.min.css"
-    ],
-    "refer": []
-  },
-  "template/friends.html": {
-    "resources": [
-      "css/oneday/friends.css",
-      "template/chat.html",
-      "css/mui.min.css",
-      "js/mui.min.js",
-      "img/ui.png",
-      "js/mui.view.js",
-      "js/mui.imageViewer.js",
-      "js/arttmpl.js",
-      "fonts/mui.ttf",
-      "js/oneday/friend.js",
-      "js/oneday/cache.js",
-      "js/oneday/base.js",
-      "js/trd/NIM_Web_SDK_v3.4.0.js",
-      "js/trd/NIM_Web_NIM_v3.4.0.js",
-      "css/mui.imageviewer.css",
-      "css/app.css",
-      "js/trd/iscroll-probe.js"
-    ],
-    "refer": [
-      "template/chat.html",
-      "template/detail.html"
-    ]
-  },
-  "template/setting.html": {
-    "resources": [
-      "js/mui.view.js",
-      "fonts/mui.ttf"
-    ],
-    "refer": [
-      "template/login.html"
-    ]
-  },
-  "template/login.html": {
-    "resources": [
-      "js/mui.min.js",
-      "fonts/mui.ttf",
-      "css/mui.min.css",
-      "js/oneday/login.js",
-      "js/oneday/base.js"
-    ],
-    "refer": [
-      "index.html"
-    ]
-  },
-  "template/find.html": {
-    "refer": [
-      "template/friends.html",
-      "template/detail.html",
-      "template/search.html"
-    ],
-    "resources": [
-      "img/ui.png",
-      "js/oneday/find.js",
-      "css/oneday/find.css",
-      "img/female.png",
-      "js/arttmpl.js",
-      "css/app.css",
-      "css/mui.min.css",
-      "js/mui.min.js",
-      "fonts/mui.ttf",
-      "js/oneday/base.js"
-    ]
-  },
-  "template/detail.html": {
-    "resources": [
-      "img/yuantiao.jpg",
-      "js/oneday/detail.js",
-      "img/ui.png",
-      "css/oneday/detail.css",
-      "js/mui.min.js",
-      "fonts/mui.ttf",
-      "js/oneday/base.js",
-      "css/mui.min.css",
-      "js/arttmpl.js",
-      "css/app.css"
-    ]
-  },
-  "template/search.html": {
-    "resources": [
-      "js/mui.min.js",
-      "fonts/mui.ttf",
-      "css/mui.min.css",
-      "js/oneday/search.js"
-    ]
-  }
+	"index.html": {
+		"resources": [
+			"js/mui.min.js",
+			"fonts/mui.ttf",
+			"css/mui.min.css",
+			"template/home.html",
+			"css/app.css"
+		],
+		"refer": [
+			"template/home.html",
+			"template/login.html",
+			"template/chat.html",
+			"template/friends.html",
+			"template/setting.html",
+			"template/find.html"
+		]
+	},
+	"template/home.html": {
+		"resources": [
+			"js/oneday/home.js",
+			"css/oneday/home.css",
+			"img/yuantiao.jpg",
+			"img/ui.png",
+			"js/oneday/base.js",
+			"js/mui.min.js",
+			"css/mui.min.css",
+			"fonts/mui.ttf"
+		],
+		"refer": []
+	},
+	"template/chat.html": {
+		"resources": [
+			"js/mui.imageViewer.js",
+			"css/app.css",
+			"css/mui.imageviewer.css",
+			"js/arttmpl.js",
+			"js/mui.min.js",
+			"fonts/mui.ttf",
+			"css/mui.min.css"
+		],
+		"refer": []
+	},
+	"template/friends.html": {
+		"resources": [
+			"css/oneday/friends.css",
+			"template/chat.html",
+			"css/mui.min.css",
+			"js/mui.min.js",
+			"img/ui.png",
+			"js/mui.view.js",
+			"js/mui.imageViewer.js",
+			"js/arttmpl.js",
+			"fonts/mui.ttf",
+			"js/oneday/friend.js",
+			"js/oneday/cache.js",
+			"js/oneday/base.js",
+			"js/trd/NIM_Web_SDK_v3.4.0.js",
+			"js/trd/NIM_Web_NIM_v3.4.0.js",
+			"css/mui.imageviewer.css",
+			"css/app.css",
+			"js/trd/iscroll-probe.js"
+		],
+		"refer": [
+			"template/chat.html",
+			"template/detail.html"
+		]
+	},
+	"template/setting.html": {
+		"resources": [
+			"js/mui.view.js",
+			"fonts/mui.ttf"
+		],
+		"refer": [
+			"template/login.html",
+			"template/regist.html"
+		]
+	},
+	"template/login.html": {
+		"resources": [
+			"js/mui.min.js",
+			"fonts/mui.ttf",
+			"css/mui.min.css",
+			"js/oneday/login.js",
+			"js/oneday/base.js"
+		],
+		"refer": [
+			"index.html"
+		]
+	},
+	"template/find.html": {
+		"refer": [
+			"template/friends.html",
+			"template/detail.html",
+			"template/search.html"
+		],
+		"resources": [
+			"img/ui.png",
+			"js/oneday/find.js",
+			"css/oneday/find.css",
+			"img/female.png",
+			"js/arttmpl.js",
+			"css/app.css",
+			"css/mui.min.css",
+			"js/mui.min.js",
+			"fonts/mui.ttf",
+			"js/oneday/base.js"
+		]
+	},
+	"template/detail.html": {
+		"resources": [
+			"img/yuantiao.jpg",
+			"js/oneday/detail.js",
+			"img/ui.png",
+			"css/oneday/detail.css",
+			"js/mui.min.js",
+			"fonts/mui.ttf",
+			"js/oneday/base.js",
+			"css/mui.min.css",
+			"js/arttmpl.js",
+			"css/app.css"
+		]
+	},
+	"template/search.html": {
+		"resources": [
+			"js/mui.min.js",
+			"fonts/mui.ttf",
+			"css/mui.min.css",
+			"js/oneday/search.js"
+		]
+	}
 }

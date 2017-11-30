@@ -14,7 +14,7 @@
 			<h1 class="mui-title">登录</h1>
 		</header>
 		<div class="mui-content">
-			
+
 			<div style="padding: 10px 10px;">
 				<div id="segmentedControl" class="mui-segmented-control">
 					<a class="mui-control-item mui-active" href="#item1">
@@ -25,7 +25,7 @@
 					</a>
 				</div>
 			</div>
-			
+
 			<div>
 				<div id="item1" class="mui-control-content mui-active">
 					<div class="mui-content-padded" style="margin: 10px;">
@@ -35,7 +35,7 @@
 						<div class="mui-input-row ">
 							<input type="password" id="password" class="mui-input-password" placeholder="密码">
 						</div>
-						
+
 						<div class="mui-input-row ">
 							<button type="button" class="mui-btn-numbox-plus mui-btn-link">注册</button>
 							<button type="button" class="mui-btn-numbox-plus mui-btn-link">忘记密码</button>
@@ -52,29 +52,49 @@
 						</div>
 						<div class="mui-input-row ">
 							<input type="text" id="code" class="" placeholder="验证码" style="width: 65%;float: left;">
-							<button type="button" class="mui-btn mui-btn-blue" style="width: 30%;"  onclick="return false;">发送</button>
+							<button type="button" class="mui-btn mui-btn-blue" style="width: 30%;" onclick="return false;">发送</button>
 						</div>
 						<div class="mui-input-row ">
 							<button type="button" class="mui-btn-numbox-plus mui-btn-link">注册</button>
 							<button type="button" class="mui-btn-numbox-plus mui-btn-link">忘记密码</button>
 						</div>
-						
+
 						<div class="mui-button-row">
 							<button type="button" class="mui-btn mui-btn-success mui-btn-block" id="submit-item2">提交</button>
 						</div>
 					</div>
 				</div>
 			</div>
-			
-			
-			
-			
-			
+
 		</div>
 		<script src="../js/mui.min.js"></script>
 		<script src="../js/oneday/base.js"></script>
 		<script src="../js/oneday/login.js"></script>
-		
+
 	</body>
+
+	<script>
+		//TODO dev code
+		devSetting();
+		function devSetting() {
+			mui.plusReady(function() {
+				var preTime = 0,
+					tapCount = 0;
+				window.addEventListener("tap", function() {
+					if(new Date().getTime() - preTime < 500) {
+						tapCount++;
+						if(tapCount == 10) {
+							plus.nativeUI.prompt("请输入服务器地址", function(a){
+								a.value&&(localStorage.customHost = a.value); 
+							}, "dev-toop", "当前值:"+ od.host, ["确定"]);
+						}
+					} else {
+						tapCount = 0;
+					}
+					preTime = new Date().getTime();
+				});
+			});
+		}
+	</script>
 
 </html>
