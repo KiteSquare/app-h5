@@ -40,11 +40,13 @@
 	</body>
 	<script src="../js/mui.min.js"></script>
 	<script type="text/javascript">
-		localStorage.staticUrl = "http://www.chender.cn/oneday";
 		if(window.confirm("是否更改主页地址")){
-			 var url=window.prompt(localStorage.staticUrl);
-			 url = url||localStorage.staticUrl;
-			location.href=url;
+			 var url=window.prompt("请输入地址",localStorage.staticUrl||"index.html");
+			 if(url){
+			 	localStorage.staticUrl=url;
+			 	location.href=url;
+			 	mui=null;//让后面的代码不执行，以免初始化了本地的html
+			 }
 		}
 		//mui初始化
 		mui.init();
@@ -83,8 +85,6 @@
 		        	mui.fire(chidrens[i],"refresh");
 		        }
 		    });
-		    
-		    
 		    
 		    
 		    
