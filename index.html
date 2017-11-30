@@ -40,6 +40,12 @@
 	</body>
 	<script src="../js/mui.min.js"></script>
 	<script type="text/javascript">
+		localStorage.staticUrl = "http://www.chender.cn/oneday";
+		if(window.confirm("是否更改主页地址")){
+			 var url=window.prompt(localStorage.staticUrl);
+			 url = url||localStorage.staticUrl;
+			location.href=url;
+		}
 		//mui初始化
 		mui.init();
 		var subpages = ['template/home.html', 'template/find.html', 'template/chat.html', 'template/setting.html'];

@@ -187,11 +187,11 @@ od.base = {
 		}
 		plus.webview.currentWebview().close();
 	},
-	refeshCurrentPage(){
-		var url = od.host +"/template/" + od.getCurrentFileName();
-		window.location = url;
+	refeshCurrentPage: function(){
+//		var url = od.host +"/template/" + od.getCurrentFileName();
+		window.location.reload();
 	},
-	addRefreshBtn() {
+	addRefreshBtn: function() {
 		var html = '<button type="button" class="mui-btn" id="J_refeshPage" style="position:fixed;top:10px;left:50%;color:red;z-index:999">刷新</button>';
 		var body = document.getElementsByTagName("body")[0];
 		body.insertAdjacentHTML('beforeend',  html);
