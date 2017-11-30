@@ -186,6 +186,18 @@ od.base = {
 			main.show();
 		}
 		plus.webview.currentWebview().close();
+	},
+	refeshCurrentPage(){
+		var url = od.host +"/template/" + od.getCurrentFileName();
+		window.location = url;
+	},
+	addRefreshBtn() {
+		var html = '<button type="button" class="mui-btn" id="J_refeshPage" style="position:fixed;top:10px;left:50%;color:red;z-index:999">刷新</button>';
+		var body = document.getElementsByTagName("body")[0];
+		body.insertAdjacentHTML('beforeend',  html);
+		document.getElementById("J_refeshPage").addEventListener("tap", function(e){
+			od.base.refeshCurrentPage();
+		} ,false);
 	}
 }
 /**
@@ -194,10 +206,20 @@ od.base = {
  */
 od.getUrlParam = function(name) {
 	var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
-	var r = window.location.search.substr(1).match(reg);
+	var r = window.location.search.substr(1);
 	if(r != null) return unescape(r[2]);
 	return null;
 }
+/**
+ * 获取当前页面文件名
+ * @param {Object} name
+ */
+od.getCurrentFileName = function() {
+	var pathname = window.location.pathname,index=pathname.lastIndexOf("/");
+	var r = pathname.substr(index+1);
+	return r;
+}
+
 /**
  * 判空
  * @param {Object} data

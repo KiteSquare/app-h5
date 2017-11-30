@@ -1,4 +1,5 @@
 od = window.od || {};
+od.base.addRefreshBtn();
 od.find = {
 	inits: function() {
 		od.find.initPage();

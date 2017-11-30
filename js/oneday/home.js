@@ -1,11 +1,13 @@
 od = window.od || {};
 od.home = od.home || {};
+od.base.addRefreshBtn();
 od.home = {
 	inits: function() {
 		od.home.initMui();
 		od.home.bindAddTopickTapEvent();
 		od.home.initPage();
 		od.home.bindTopicTap();
+		
 		//		od.home.bindDropEvent();
 		//		od.home.bindSendClickEvent();
 		//		od.home.bindUserImageClick();

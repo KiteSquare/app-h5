@@ -1,5 +1,6 @@
 od = window.od ||{};
 od.login = od.login || {};
+od.base.addRefreshBtn();
 od.login = {
 	inits: function() {
 		mui.init();

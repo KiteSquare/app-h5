@@ -1,4 +1,5 @@
 od = window.od || {};
+od.base.addRefreshBtn();
 od.topic = {
 	ui:{},
 	inits: function() {

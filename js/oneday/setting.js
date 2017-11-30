@@ -1,4 +1,5 @@
 od = window.od || {};
+od.base.addRefreshBtn();
 od.setting = {
 	inits: function() {
 		mui.init();

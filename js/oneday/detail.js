@@ -1,5 +1,6 @@
 od = window.od || {};
 od.chat = od.chat || {};
+od.base.addRefreshBtn();
 od.detail = {
 	inits: function() {
 		od.detail.uid = od.getUrlParam("uid"),//  plus.webview.currentWebview().tid;

@@ -1,6 +1,7 @@
 od = window.od || {};
 od.friend = od.friend || {};
 od.chat = od.chat || {};
+od.base.addRefreshBtn();
 od.friend = {
 	chatScrollArr: {},
 	CHAT_PAGE_ID_PRE: "page-",

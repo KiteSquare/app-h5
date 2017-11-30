@@ -1,4 +1,5 @@
 od = window.od || {};
+od.base.addRefreshBtn();
 od.addtopic = {
 	inits: function() {
 		mui.init();

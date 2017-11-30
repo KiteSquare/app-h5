@@ -1,4 +1,5 @@
 od = window.od || {};
+od.base.addRefreshBtn();
 od.regist = {
 	step:1,
 	inits: function(){
