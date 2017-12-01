@@ -100,6 +100,7 @@ od.home = {
 			document.getElementById("content").insertAdjacentHTML('beforeend',  template('content-template', {
 					"data": data.data.data
 				}));
+				od.imgLoader.scan("[img-source]");
 			od.home.lastPage = data.data.lastPage;
 		} else {
 			mui.toast(data.message);

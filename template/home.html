@@ -73,11 +73,13 @@
 		<script src="../js/oneday/base.js"></script>
 		<script src="../js/oneday/home.js"></script>
 		<script src="../js/arttmpl.js"></script>
+		<script src="../js/package/imgLoader.js"></script>
+		<script src="../js/package/VG.js"></script>
 		<script type="text/template" id="content-template">
 			<% for(var i in data){ var topic=data[i]; %>
 				<div class="mui-card" data-tid="<%=(topic.id || "")%>">
 						<div class="mui-card-header mui-card-media">
-							<img src="<%=(topic.head || "")%>">
+							<img src="/img/ui.png" err-src="" img-source="<%=(topic.head || "")%>">
 							<div class="mui-media-body">
 								<%=(topic.title || "")%>
 								<p>发表自 <%=(topic.uname || "")%></p>
@@ -100,7 +102,7 @@
 						</div>
 					</div>
 			<%}%>
-		</script>	
+		</script>
 	</body>
 
 </html>
