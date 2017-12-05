@@ -49,9 +49,6 @@ od.home = {
 			od.home.getNextData();
 			mui('#pullrefresh').pullRefresh().endPullupToRefresh(false); //参数为true代表没有更多数据了。
 			
-			
-			
-			
 //			var table = document.body.querySelector('.mui-table-view');
 //			var cells = document.body.querySelectorAll('.mui-table-view-cell');
 //			for(var i = cells.length, len = i + 20; i < len; i++) {
@@ -82,17 +79,7 @@ od.home = {
 			param["lon"] = plus.storage.getItem("lon");
 			param["cityCode"] = plus.storage.getItem("cityCode");
 		}
-		mui.ajax(
-			od.host + "/topic/recommend", {
-				type: "post",
-				dataType: "json",
-				contentType: "application/json",
-				data: JSON.stringify(param),
-				success: od.home.onPageLoad,
-				error: function(e) {
-					od.base.onError("FAILED_NETWORK");
-				},
-		});
+		od.http.post("/topic/recommend", JSON.stringify(param), od.home.onPageLoad);
 
 	},
 	onPageLoad: function(data) {

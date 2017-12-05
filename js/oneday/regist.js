@@ -64,15 +64,10 @@ od.regist = {
 			var clipImageSrc = event.detail.resImg;
 			if (clipImageSrc) {
 				document.getElementById("head-img").src = clipImageSrc;
-				mui.ajax(
-					od.host + "/oneday/user/uploadHead", 
-					{
-						type: "post",
-						dataType: "json",
-						data:{
-							data:clipImageSrc
-						},
-						success: function(data){
+				var param={
+					data:clipImageSrc
+				}
+				od.http.post("/oneday/user/uploadHead", JSON.stringify(param), function(data){
 							if (data.code && data.code != "0") {
 								mui.toast(data.message);
 								return;
@@ -85,14 +80,6 @@ od.regist = {
 							}
 							document.getElementById("head").setAttribute("data-head",url);
 						},
-						error: function(e) {
-							mui.toast("error " + e, {
-								duration: 'short',
-								type: 'div'
-							});
-						},
-						timeout: 10000
-					}
 				);
 			}
 		});
@@ -277,14 +264,7 @@ od.regist = {
 				if (param === false) {
 					return;
 				}
-				mui.ajax(
-					od.host + "/oneday/user/regist", 
-					{
-						type:"post",	
-						dataType: "json",
-						contentType:"application/json",
-						data:JSON.stringify(param),  
-						success: function(data) {
+				od.http.post("/oneday/user/regist", JSON.stringify(param), function(data) {
 							if (data.code && data.code != "0") {
 								mui.toast(data.message,{ duration:'short', type:'div' }) 
 								return;
@@ -337,12 +317,8 @@ od.regist = {
 								})
 							}
 							
-						},
-						error: function(e){
-							mui.toast("error "+e,{ duration:'short', type:'div' });
-						},
-						timeout:10000
 				});
+				
 				
 		} else {
 			if (preobj) {

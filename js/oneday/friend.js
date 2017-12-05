@@ -24,22 +24,10 @@ od.friend = {
 				mui.toast("请先登录");
 				return;
 			}
-			mui.ajax(
-				od.host + "/oneday/willow/accept", {
-					type: "post",
-					dataType: "json",
-					contentType: "application/json",
-					data: JSON.stringify({
-						"accessToken": token,
-						"targetUserId": targetUserId
-					}),
-					success: od.friend.onAcceptedClickSuccess,
-					error: function(e) {
-						od.base.onError("FAILED_NETWORK");
-					},
-					timeout: 10000
-				}
-			);
+			var param = {
+				"targetUserId": targetUserId
+			};
+			od.http.post("/oneday/willow/accept", JSON.stringify(param), od.friend.onAcceptedClickSuccess);
 		})
 
 	},
@@ -65,22 +53,11 @@ od.friend = {
 				mui.toast("请先登录");
 				return;
 			}
-			mui.ajax(
-				od.host + "/oneday/willow/reject", {
-					type: "post",
-					dataType: "json",
-					contentType: "application/json",
-					data: JSON.stringify({
-						"accessToken": token,
-						"targetUserId": targetUserId
-					}),
-					success: od.friend.onRejectClickSuccess,
-					error: function(e) {
-						od.base.onError("FAILED_NETWORK");
-					},
-					timeout: 10000
-				}
-			);
+			var param={
+				"targetUserId": targetUserId
+			}
+			od.http.post("/oneday/willow/reject", JSON.stringify(param), od.friend.onRejectClickSuccess);
+			
 		})
 
 	},
@@ -335,21 +312,8 @@ od.friend = {
 			mui.toast("你还未登录哦");
 			return;
 		}
+		od.http.post("/oneday/willow/candidates?currentPage="+(od.friend.currentPage+1)+"&count=1", JSON.stringify({}), od.friend.onLoadFriends);
 		
-		mui.ajax(
-			od.host + "/oneday/willow/candidates?currentPage="+(od.friend.currentPage+1)+"&count=1", 
-			{
-				type: "post",
-				dataType: "json",
-				success: od.friend.onLoadFriends,
-				contentType:"application/json",
-				data:JSON.stringify({"accessToken":token}),  
-				error: function(e) {
-					od.base.onError("FAILED_NETWORK");
-				},
-				timeout: 10000
-			}
-		);
 	},
 	onGetUserInfoSuccess: function(data) {
 		//		console.log(data);
@@ -406,33 +370,13 @@ od.chat = {
 		od.chat.initChatSdk();
 	},
 	initChatSdk: function() {
-		if (!od.base.isLogin()) {
-			return;
-		}
-		var token = od.base.getAccessToken();
-		var param = {
-			'accessToken': token
-		};
-		mui.ajax(
-			od.host + "/oneday/user/get", 
-			{
-				type: "post",
-				dataType: "json",
-				contentType:"application/json",
-				data:JSON.stringify(param),
-				success: function(data) {
-					if (data.code && data.code != "0") {
-						mui.toast(data.message);
-						return;
-					}
-					od.chat.initSDKBridge(data.data.id);
-				},
-				error: function(e) {
-					od.base.onError("FAILED_NETWORK");
-				},
-				timeout: 10000
+		od.http.post("/oneday/user/get", "{}", function(data) {
+			if (data.code && data.code != "0") {
+				mui.toast(data.message);
+				return;
 			}
-		);
+			od.chat.initSDKBridge(data.data.id);
+		});
 		
 	},
 	initEvents: function() {

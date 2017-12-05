@@ -53,8 +53,7 @@
 			method: "GET",
 			filename: localFolder + tag + ".png",
 			timeout: 10,
-			url,
-			url
+			url:url
 		};
 		//将任务提交给主页面进行下载
 		od.VG.method(downWebview, "od.downloader.download", dp, function(result) {

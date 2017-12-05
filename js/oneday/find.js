@@ -67,24 +67,7 @@ od.find = {
 		document.getElementById("app-next").addEventListener("tap", od.find.loadRecomend);
 	},
 	loadRecomend: function() {
-		var token = od.base.getAccessToken();
-		if (!token) {
-			mui.toast("你还未登录哦");
-			return;
-		}
-		mui.ajax(
-			od.host + "/oneday/search/recommend", 
-			{
-				type:"post",	
-				dataType: "json",
-				contentType:"application/json",
-				data:JSON.stringify({"accessToken":token}),  
-				success: od.find.onLoadRecomendSuccess,
-				error: function(e){
-					od.base.onError("FAILED_NETWORK");
-				},
-			}
-		);
+		od.http.post("/oneday/search/recommend", "{}", od.find.onLoadRecomendSuccess);
 	},
 	onLoadRecomendSuccess: function(data) {
 		if (data.code == "0") {

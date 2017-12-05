@@ -19,13 +19,8 @@ od.addtopic = {
 		mui(".mui-bar").on("tap", "#create0", od.addtopic.onSubmitTap);
 	},
 	onSubmitTap: function(e) {
-		var accessToken = od.base.getAccessToken(),
-			title = document.getElementById("title").value,
+		var title = document.getElementById("title").value,
 			content = document.getElementById("tcontent").value;
-		if(od.isNull(accessToken)) {
-			mui.toast("请先登录哦");
-			return;
-		}
 		if(od.isNull(title) || title.length == 0) {
 			mui.toast("请输入标题");
 			return;
@@ -43,9 +38,7 @@ od.addtopic = {
 			return;
 		}
 		plus.nativeUI.showWaiting( "正在上传");
-		accessToken = accessToken.replace(/\n/g, "");
 		var param = {
-			"accessToken": accessToken,
 			"title": title,
 			"content": content,
 			"category": 1,
@@ -100,19 +93,7 @@ od.addtopic = {
 			od.addtopic.checkUploadAndAddTopick(param);
 
 		} else {
-			mui.ajax(
-				od.host + "/topic/create", {
-					type: "post",
-					dataType: "json",
-					contentType: "application/json",
-					data: JSON.stringify(param),
-					success: od.addtopic.onCreateTopicSuccess,
-					error: function(e) {
-						od.base.onError("FAILED_NETWORK");
-					},
-					timeout: 10000
-				}
-			);
+			od.http.post("/topic/create", JSON.stringify(param), od.addtopic.onCreateTopicSuccess);
 		}
 
 	},
@@ -130,20 +111,7 @@ od.addtopic = {
 
 				if(state) {
 					param['images'] = od.addtopic.images.join(",");
-					mui.ajax(
-						od.host + "/topic/create", {
-							type: "post",
-							dataType: "json",
-							contentType: "application/json",
-							data: JSON.stringify(param),
-							success: od.addtopic.onCreateTopicSuccess,
-							error: function(e) {
-								od.base.onError("FAILED_NETWORK");
-								plus.nativeUI.closeWaiting();
-							},
-							timeout: 10000
-						}
-					);
+					od.http.post("/topic/create", JSON.stringify(param), od.addtopic.onCreateTopicSuccess);
 				} else {
 					od.addtopic.checkUploadAndAddTopick(param);
 				}

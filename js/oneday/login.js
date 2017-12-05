@@ -27,7 +27,7 @@ od.login = {
 			"type": 1,
 			"url": url
 		};
-		od.http.post("/oneday/user/login", JSON.stringify(od.login.param), od.login.onLoginSuccess)
+		od.http.post("/oneday/user/login", JSON.stringify(od.login.param), od.login.onLoginSuccess);
 		//		mui.ajax(
 		//			od.host + "/oneday/user/login", 
 		//			{

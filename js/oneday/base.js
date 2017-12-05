@@ -82,16 +82,9 @@ od.base = {
 			return;
 		}
 		var param = {
-			'accessToken': token,
 			'uid': 0
 		};
-		mui.ajax(
-			od.host + "/oneday/user/get", {
-				type: "post",
-				dataType: "json",
-				contentType: "application/json",
-				data: JSON.stringify(param),
-				success: function(data) {
+		od.http.post("/oneday/user/get", JSON.stringify(param), function(data) {
 					if(data.code && data.code != "0") {
 						if(data.code == '0022') {
 							od.base.reLogin();
@@ -104,12 +97,7 @@ od.base = {
 						return;
 					}
 				},
-				error: function(e) {
-					od.base.onError("FAILED_NETWORK");
-				},
-				timeout: 10000
-			}
-		);
+	);
 	},
 	onError: function(errcode) {
 		switch(errcode) {
@@ -139,19 +127,8 @@ od.base = {
 			"type": 1,
 			"url": plus.webview.currentWebview().id
 		};
-		mui.ajax(
-			od.host + "/oneday/user/login", {
-				type: "post",
-				dataType: "json",
-				contentType: "application/json",
-				data: JSON.stringify(param),
-				success: od.base.onLoginSuccess,
-				error: function(e) {
-					console.log(e);
-					alert("error " + e);
-				},
-				timeout: 10000
-			});
+		od.http.post("/oneday/user/login", JSON.stringify(param), od.base.onLoginSuccess);
+		
 	},
 	onLoginSuccess: function(data) {
 		if(data.code && data.code != "0") {

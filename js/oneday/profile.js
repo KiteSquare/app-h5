@@ -31,48 +31,18 @@ od.profile = {
 	},
 
 	initData: function() {
-		var token = od.base.getAccessToken();
-		if(!token) {
-			mui.toast("你还未登录哦");
-			return;
-		}
 		var param = {
-			'accessToken': token,
 			'uid': 0
 		};
-		mui.ajax(
-			od.host + "/oneday/user/get", {
-				type: "post",
-				dataType: "json",
-				contentType: "application/json",
-				data: JSON.stringify(param),
-				success: od.profile.onUserInfoSuccess,
-				error: function(e) {
-					od.base.onError("FAILED_NETWORK");
-				},
-				timeout: 10000
-			}
-		);
+		od.http.post("/oneday/user/get", JSON.stringify(param), od.profile.onUserInfoSuccess);
 	},
 	updateUserProfile: function(param, callback) {
 		if(!param) {
 			return;
 		}
 
-		var token = od.base.getAccessToken();
-		if(!token) {
-			mui.toast("你还未登录哦");
-			return;
-		}
-		param['accessToken'] = token;
-
-		mui.ajax(
-			od.host + "/oneday/user/update", {
-				type: "post",
-				dataType: "json",
-				contentType: "application/json",
-				data: JSON.stringify(param),
-				success: function(data) {
+		
+		od.http.post("/oneday/user/update", JSON.stringify(param), function(data) {
 					if(callback) {
 						callback(data);
 					}
@@ -81,13 +51,7 @@ od.profile = {
 						return;
 					}
 					mui.toast("更新成功");
-				},
-				error: function(e) {
-					od.base.onError("FAILED_NETWORK");
-				},
-				timeout: 10000
-			}
-		);
+			});
 	},
 
 	onUserInfoSuccess: function(data) {
@@ -152,14 +116,7 @@ od.profile = {
 			var clipImageSrc = event.detail.resImg;
 			if(clipImageSrc) {
 				document.getElementById("head-img").src = clipImageSrc;
-				mui.ajax(
-					od.host + "/oneday/user/uploadHead", {
-						type: "post",
-						dataType: "json",
-						data: {
-							data: clipImageSrc
-						},
-						success: function(data) {
+				od.http.post("/oneday/user/uploadHead", JSON.stringify({data: clipImageSrc}), function(data) {
 							if(data.code && data.code != "0") {
 								mui.toast(data.message);
 								return;
@@ -174,13 +131,9 @@ od.profile = {
 							od.profile.updateUserProfile({
 								"head": url
 							});
-						},
-						error: function(e) {
-							od.base.onError("FAILED_NETWORK");
-						},
-						timeout: 10000
-					}
-				);
+						});
+				
+			
 			}
 		});
 	},

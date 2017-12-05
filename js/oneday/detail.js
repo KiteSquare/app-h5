@@ -21,22 +21,10 @@ od.detail = {
 //			return;
 //		}
 		if(targetUserId) {
-			mui.ajax(
-				od.host + "/oneday/willow/relation", {
-					type: "post",
-					dataType: "json",
-					contentType: "application/json",
-					data: JSON.stringify({
-						"accessToken": token,
-						"targetUserId": targetUserId
-					}),
-					success: od.detail.onloadDataSuccess,
-					error: function(e) {
-						mui.toast('error');
-					},
-					timeout: 10000
-				}
-			);
+			var param = {
+				"targetUserId": targetUserId
+			};
+			od.http.post("/oneday/willow/relation", JSON.stringify(param), od.detail.onloadDataSuccess);
 		}
 	},
 	onloadDataSuccess: function(data) {
@@ -103,22 +91,10 @@ od.detail = {
 			mui.toast("你还未登录哦");
 			return;
 		}
-		mui.ajax(
-			od.host + "/oneday/willow/send", {
-				type: "post",
-				dataType: "json",
-				contentType: "application/json",
-				data: JSON.stringify({
-					"accessToken": token,
-					"receiverId": receiverId
-				}),
-				success: od.detail.onSendTapSuccess,
-				error: function(e) {
-					mui.toast('error');
-				},
-				timeout: 10000
-			}
-		);
+		var param = {
+			"receiverId": receiverId
+		}
+		od.http.post("/oneday/willow/send", JSON.stringify(param), od.detail.onSendTapSuccess);
 
 	},
 	onSendTapSuccess: function(data) {
