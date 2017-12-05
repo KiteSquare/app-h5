@@ -8,6 +8,7 @@
 (function() {
 	var localFolder = "_doc/downloads/img4/";
 	var downWebview; //执行下载的webview
+	od = window.od = window.od || {};
 	od.imgLoader = {
 		scan: function(selector) {
 			var imgs = document.querySelectorAll(selector);

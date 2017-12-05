@@ -27,7 +27,7 @@
 					if(status == 200) {
 						cbs[i]({success:true,status:200});
 					} else {
-						cb[i]({success:false,status:status});
+						cbs[i]({success:false,status:status});
 					}
 				}
 			});

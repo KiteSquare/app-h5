@@ -8,6 +8,8 @@
 		<script src="js/mui.min.js"></script>
 		<script src="js/package/VG.js"></script>
 		<script src="js/package/downloader.js"></script>
+		<script src="js/package/http.js"></script>
+		<script src="js/oneday/base.js"></script>
 		<link href="css/mui.min.css" rel="stylesheet" />
 		<link href="css/app.css" rel="stylesheet" />
 	</head>
@@ -40,7 +42,6 @@
 			</a>
 		</nav>
 	</body>
-	<script src="../js/mui.min.js"></script>
 	<script type="text/javascript">
 		if(window.confirm("是否更改主页地址")){
 			 var url=window.prompt("请输入地址",localStorage.staticUrl||"index.html");
@@ -180,6 +181,7 @@
 		 */
 		function systemInit(){
 			od.downloader.clear();
+			od.http.session();
 		}
 		
 		

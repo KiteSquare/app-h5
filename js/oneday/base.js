@@ -1,5 +1,5 @@
 od = window.od || {};
-od.host = localStorage.customHost || od.host || "http://www.chender.cn/oneday/";
+od.host = localStorage.customHost || od.host || "http://www.chender.cn/oneday";
 //od.host = od.host || "http://182.61.40.58";
 
 od.base = od.base || {};
