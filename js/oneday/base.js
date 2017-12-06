@@ -96,7 +96,7 @@ od.base = {
 						od.base.reLogin();
 						return;
 					}
-				},
+				}
 	);
 	},
 	onError: function(errcode) {

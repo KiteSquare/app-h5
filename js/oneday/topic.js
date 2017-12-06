@@ -32,17 +32,7 @@ od.topic = {
 		var param = {
 			"id":od.topic.tid
 		};
-		mui.ajax(
-			od.host + "/topic/get", {
-				type: "post",
-				dataType: "json",
-				contentType: "application/json",
-				data: JSON.stringify(param),
-				success: od.topic.onPageLoad,
-				error: function(e) {
-					od.base.onError("FAILED_NETWORK");
-				},
-		});
+		od.http.post("/topic/get", JSON.stringify(param), od.topic.onPageLoad);
 	},
 	onPageLoad: function(data) {
 		if(data.code != "0") {
@@ -79,17 +69,7 @@ od.topic = {
 			param["lat"] = lat;
 			param["lon"] = plus.storage.getItem("lon");
 		}
-		mui.ajax(
-			od.host + "/comment/get", {
-				type: "post",
-				dataType: "json",
-				contentType: "application/json",
-				data: JSON.stringify(param),
-				success: od.topic.onNextRepliesSuccess,
-				error: function(e) {
-					od.base.onError("FAILED_NETWORK");
-				},
-		});
+		od.http.post("/comment/get", JSON.stringify(param), od.topic.onNextRepliesSuccess);
 	},
 	onNextRepliesSuccess: function(data) {
 		if(data.code && data.code == "0") {
@@ -160,7 +140,6 @@ od.topic = {
 		}
 //		content = content.replace(new RegExp('\n', 'gm'), '<br/>');
 		var param = {
-			"accessToken": accessToken,
 			"topicId" : od.topic.tid,
 			"content" : content
 		}
@@ -169,17 +148,7 @@ od.topic = {
 			param["lat"] = lat;
 			param["lon"] = plus.storage.getItem("lon");
 		}
-		mui.ajax(
-			od.host + "/comment/add", {
-				type: "post",
-				dataType: "json",
-				contentType: "application/json",
-				data: JSON.stringify(param),
-				success: od.topic.onAddReplySuccess,
-				error: function(e) {
-					od.base.onError("FAILED_NETWORK");
-				},
-		});
+		od.http.post("/comment/add", JSON.stringify(param), od.topic.onAddReplySuccess);
 	},
 	onAddReplySuccess: function (data) {
 		if(data.code && data.code == "0") {
